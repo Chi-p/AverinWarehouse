@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e2fc030659844fe2a67728fb76f094b2" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Certificate" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Client" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Country" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Manufacturer" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Operator" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Product" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Provider" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Role" Width="1.5" PointX="1.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Shipment" Width="1.5" PointX="5.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.ShipmentContract" Width="1.5" PointX="3" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Supply" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.SupplyContract" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.SupplyOfProduct" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.User" Width="1.5" PointX="1.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="AverinWarehouseDbModel.Warehouse" Width="1.5" PointX="3" PointY="25.125" IsExpanded="true" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_Certificate_Manufacturer" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_Product_Certificate" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_Supply_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_Manufacturer_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_Provider_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_Operator_User" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_ShipmentContract_Operator" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_SupplyContract_Operator" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_SupplyOfProduct_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_Supply_Provider" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_Shipment_ShipmentContract" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_Shipment_Warehouse" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_Supply_SupplyContract" ManuallyRouted="false" />
+        <AssociationConnector Association="AverinWarehouseDbModel.FK_SupplyOfProduct_Supply" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

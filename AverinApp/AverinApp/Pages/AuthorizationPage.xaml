@@ -1,0 +1,29 @@
+﻿<Page x:Class="AverinApp.Pages.AuthorizationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AverinApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="1000"
+      Title="Авторизация">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Style="{StaticResource TbkBody}" Text="Авторизация" HorizontalAlignment="Center" FontSize="40"/>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Логин: " Style="{StaticResource TbkBody}"/>
+            <TextBox Width="200" Name="TbxLogin"/>
+            <TextBlock Text="Пароль: " Style="{StaticResource TbkBody}"/>
+            <PasswordBox Width="200" Name="PbxPassword"/>
+            <Button Name="BtnLogin" Width="auto" Content="Войти" Click="BtnLogin_Click"/>
+        </StackPanel>
+        
+    </Grid>
+</Page>
