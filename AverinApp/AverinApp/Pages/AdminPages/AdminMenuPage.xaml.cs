@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AverinApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,24 +14,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AverinApp.Pages
+namespace AverinApp.Pages.AdminPages
 {
     /// <summary>
-    /// Interaction logic for AuthorizationPage.xaml
+    /// Interaction logic for AdminMenuPage.xaml
     /// </summary>
-    public partial class AuthorizationPage : Page
+    public partial class AdminMenuPage : Page
     {
-        public AuthorizationPage()
+        public AdminMenuPage()
         {
             InitializeComponent();
+            DataContext = AppData.CurrentUser;
         }
 
-        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        private void BtnProducts_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TbxLogin.Text))
-            {
-
-            }
+            NavigationService.Navigate(new ProductsPage());
         }
     }
 }

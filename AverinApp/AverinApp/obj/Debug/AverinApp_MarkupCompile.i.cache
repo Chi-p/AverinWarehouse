@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\Programming\repos\AverinApp\AverinApp\obj\Debug\
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\
 AverinApp
 none
 false
 DEBUG;TRACE
-F:\Programming\repos\AverinApp\AverinApp\App.xaml
-2-805202955
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\App.xaml
+7410559734
 21861686433
-26-863479775
-181049797426
-Pages\AuthorizationPage.xaml;Windows\MainWindow.xaml;
+39-1255879983
+18176781465
+Pages\AdminPages\AdminMenuPage.xaml;Pages\AdminPages\ProductsPage.xaml;Pages\GeneralPages\AuthorizationPage.xaml;Pages\OperatorPages\OperatorMenuPage.xaml;Pages\OperatorPages\ShipmentPage.xaml;Pages\OperatorPages\SupplyPage.xaml;Windows\MainWindow.xaml;
 
 True
 

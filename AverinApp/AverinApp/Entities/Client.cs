@@ -17,7 +17,7 @@ namespace AverinApp.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
         {
-            this.Supply = new HashSet<Supply>();
+            this.Shipment = new HashSet<Shipment>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace AverinApp.Entities
         public string Phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supply> Supply { get; set; }
+        public virtual ICollection<Shipment> Shipment { get; set; }
     }
 }

@@ -67,7 +67,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Pages\AuthorizationPage.xaml">
+    <Page Include="Pages\AdminPages\AdminMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminPages\ProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GeneralPages\AuthorizationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\OperatorPages\OperatorMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\OperatorPages\ShipmentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\OperatorPages\SupplyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -79,6 +99,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\MessagesClass.cs" />
+    <Compile Include="Entities\AppData.cs" />
     <Compile Include="Entities\Certificate.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
@@ -109,6 +131,7 @@
     <Compile Include="Entities\Operator.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\OperatorPartial.cs" />
     <Compile Include="Entities\Product.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
@@ -124,6 +147,12 @@
     <Compile Include="Entities\ShipmentContract.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ShipmentOfProduct.cs">
+      <DependentUpon>ModelDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Status.cs">
+      <DependentUpon>ModelDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Supply.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
@@ -133,17 +162,35 @@
     <Compile Include="Entities\SupplyOfProduct.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\SupplyOfProductPartial.cs" />
+    <Compile Include="Entities\SupplyPartial.cs" />
     <Compile Include="Entities\sysdiagrams.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\User.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\UserPartial.cs" />
     <Compile Include="Entities\Warehouse.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AuthorizationPage.xaml.cs">
+    <Compile Include="Pages\AdminPages\AdminMenuPage.xaml.cs">
+      <DependentUpon>AdminMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminPages\ProductsPage.xaml.cs">
+      <DependentUpon>ProductsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GeneralPages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OperatorPages\OperatorMenuPage.xaml.cs">
+      <DependentUpon>OperatorMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OperatorPages\ShipmentPage.xaml.cs">
+      <DependentUpon>ShipmentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OperatorPages\SupplyPage.xaml.cs">
+      <DependentUpon>SupplyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

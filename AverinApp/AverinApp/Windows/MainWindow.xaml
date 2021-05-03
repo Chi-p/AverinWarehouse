@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AverinApp.Windows"
         mc:Ignorable="d"
-        Title="{Binding ElementName=MainFrame,Path=Content.Title}" Height="600" Width="1000">
+        Title="{Binding ElementName=MainFrame,Path=Content.Title}" 
+        MinHeight="600" Height="600" MinWidth="1000" Width="1000" Loaded="Window_Loaded">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <Grid Name="MainTitle" Grid.Row="0" Background="{StaticResource PColor_First}">
@@ -24,5 +27,12 @@
         </Grid>
 
         <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" ContentRendered="MainFrame_ContentRendered"/>
+
+        <Grid Grid.Row="2" Background="{StaticResource SColor_DarkThird}">
+            <TextBlock Name="TbkTime" Text="Время работы в приложении: 0 часов, 0 минут, 0 секунд" VerticalAlignment="Center"
+                       Foreground="White" FontSize="20" HorizontalAlignment="Center" Style="{StaticResource TbkBody}"/>
+        </Grid>
+        
     </Grid>
+    
 </Window>

@@ -17,8 +17,10 @@ namespace AverinApp.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Operator()
         {
+            this.Shipment = new HashSet<Shipment>();
             this.ShipmentContract = new HashSet<ShipmentContract>();
-            this.SupplyContract = new HashSet<SupplyContract>();
+            this.Supply = new HashSet<Supply>();
+            this.Warehouse = new HashSet<Warehouse>();
         }
     
         public int Id { get; set; }
@@ -28,8 +30,12 @@ namespace AverinApp.Entities
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Shipment> Shipment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShipmentContract> ShipmentContract { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SupplyContract> SupplyContract { get; set; }
+        public virtual ICollection<Supply> Supply { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Warehouse> Warehouse { get; set; }
     }
 }

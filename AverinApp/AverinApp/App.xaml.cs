@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AverinApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,15 @@ namespace AverinApp
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Dispatcher.UnhandledException += Dispatcher_UnhandledException;
+        }
+
+        private void Dispatcher_UnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            AppData.Message.NotConnect();
+            e.Handled = true;
+        }
     }
 }

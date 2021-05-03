@@ -35,6 +35,8 @@ namespace AverinApp.Entities
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Shipment> Shipment { get; set; }
         public virtual DbSet<ShipmentContract> ShipmentContract { get; set; }
+        public virtual DbSet<ShipmentOfProduct> ShipmentOfProduct { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Supply> Supply { get; set; }
         public virtual DbSet<SupplyContract> SupplyContract { get; set; }
         public virtual DbSet<SupplyOfProduct> SupplyOfProduct { get; set; }

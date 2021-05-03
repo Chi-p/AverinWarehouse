@@ -18,14 +18,19 @@ namespace AverinApp.Entities
         public Warehouse()
         {
             this.Shipment = new HashSet<Shipment>();
+            this.Supply = new HashSet<Supply>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public decimal Capacity { get; set; }
+        public int OperatorId { get; set; }
     
+        public virtual Operator Operator { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Shipment> Shipment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Supply> Supply { get; set; }
     }
 }

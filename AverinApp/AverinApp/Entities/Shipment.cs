@@ -14,12 +14,27 @@ namespace AverinApp.Entities
     
     public partial class Shipment
     {
-        public string Number { get; set; }
-        public int WarehouseId { get; set; }
-        public string SupplyNumber { get; set; }
-        public string ShipmentContractNumber { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Shipment()
+        {
+            this.ShipmentOfProduct = new HashSet<ShipmentOfProduct>();
+        }
     
+        public int Id { get; set; }
+        public int WarehouseId { get; set; }
+        public string ShipmentContractNumber { get; set; }
+        public int StatusId { get; set; }
+        public int ProviderId { get; set; }
+        public int ClientId { get; set; }
+        public Nullable<int> OperatorId { get; set; }
+    
+        public virtual Client Client { get; set; }
+        public virtual Operator Operator { get; set; }
+        public virtual Provider Provider { get; set; }
         public virtual ShipmentContract ShipmentContract { get; set; }
+        public virtual Status Status { get; set; }
         public virtual Warehouse Warehouse { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShipmentOfProduct> ShipmentOfProduct { get; set; }
     }
 }

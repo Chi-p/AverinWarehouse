@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="Number" />
     </Key>
-    <Property Name="Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="DateStart" Type="datetime" Nullable="false" />
     <Property Name="DateEnd" Type="datetime" Nullable="false" />
     <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
@@ -49,12 +49,12 @@
     <Key>
       <PropertyRef Name="Number" />
     </Key>
-    <Property Name="Number" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="MeasureUnit" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="Weight" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="CertificateNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CertificateNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="Provider">
     <Key>
@@ -75,47 +75,70 @@
   </EntityType>
   <EntityType Name="Shipment">
     <Key>
-      <PropertyRef Name="Number" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="WarehouseId" Type="int" Nullable="false" />
-    <Property Name="SupplyNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="ShipmentContractNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ShipmentContractNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="StatusId" Type="int" Nullable="false" />
+    <Property Name="ProviderId" Type="int" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
+    <Property Name="OperatorId" Type="int" />
   </EntityType>
   <EntityType Name="ShipmentContract">
     <Key>
       <PropertyRef Name="Number" />
     </Key>
-    <Property Name="Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="OperatorId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="ShipmentOfProduct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShipmentId" Type="int" Nullable="false" />
+    <Property Name="ProductNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Count" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="CertificateNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="Supply">
     <Key>
-      <PropertyRef Name="Number" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProviderId" Type="int" Nullable="false" />
-    <Property Name="SupplyContractNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="ClientId" Type="int" Nullable="false" />
+    <Property Name="SupplyContractNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="StatusId" Type="int" Nullable="false" />
+    <Property Name="WarehouseId" Type="int" Nullable="false" />
+    <Property Name="OperatorId" Type="int" />
   </EntityType>
   <EntityType Name="SupplyContract">
     <Key>
       <PropertyRef Name="Number" />
     </Key>
-    <Property Name="Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="OperatorId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SupplyOfProduct">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SupplyNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="ProductNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="SupplyId" Type="int" Nullable="false" />
+    <Property Name="ProductNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="Count" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="CertificateNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -144,6 +167,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Capacity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="OperatorId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_Certificate_Manufacturer">
     <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
@@ -205,6 +229,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Shipment_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shipment">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipment_Operator">
+    <End Role="Operator" Type="Self.Operator" Multiplicity="0..1" />
+    <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operator">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shipment">
+        <PropertyRef Name="OperatorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipment_Provider">
+    <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+    <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shipment">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Shipment_ShipmentContract">
     <End Role="ShipmentContract" Type="Self.ShipmentContract" Multiplicity="1" />
     <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
@@ -214,6 +274,18 @@
       </Principal>
       <Dependent Role="Shipment">
         <PropertyRef Name="ShipmentContractNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipment_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shipment">
+        <PropertyRef Name="StatusId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -241,15 +313,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Supply_Client">
-    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+  <Association Name="FK_ShipmentOfProduct_Certificate">
+    <End Role="Certificate" Type="Self.Certificate" Multiplicity="1" />
+    <End Role="ShipmentOfProduct" Type="Self.ShipmentOfProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Certificate">
+        <PropertyRef Name="Number" />
+      </Principal>
+      <Dependent Role="ShipmentOfProduct">
+        <PropertyRef Name="CertificateNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShipmentOfProduct_Shipment">
+    <End Role="Shipment" Type="Self.Shipment" Multiplicity="1" />
+    <End Role="ShipmentOfProduct" Type="Self.ShipmentOfProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShipmentOfProduct">
+        <PropertyRef Name="ShipmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supply_Operator">
+    <End Role="Operator" Type="Self.Operator" Multiplicity="0..1" />
     <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Client">
+      <Principal Role="Operator">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Supply">
-        <PropertyRef Name="ClientId" />
+        <PropertyRef Name="OperatorId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -265,6 +361,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Supply_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supply">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Supply_SupplyContract">
     <End Role="SupplyContract" Type="Self.SupplyContract" Multiplicity="1" />
     <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
@@ -277,15 +385,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SupplyContract_Operator">
-    <End Role="Operator" Type="Self.Operator" Multiplicity="1" />
-    <End Role="SupplyContract" Type="Self.SupplyContract" Multiplicity="*" />
+  <Association Name="FK_Supply_Warehouse">
+    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+    <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Operator">
+      <Principal Role="Warehouse">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="SupplyContract">
-        <PropertyRef Name="OperatorId" />
+      <Dependent Role="Supply">
+        <PropertyRef Name="WarehouseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplyOfProduct_Certificate">
+    <End Role="Certificate" Type="Self.Certificate" Multiplicity="1" />
+    <End Role="SupplyOfProduct" Type="Self.SupplyOfProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Certificate">
+        <PropertyRef Name="Number" />
+      </Principal>
+      <Dependent Role="SupplyOfProduct">
+        <PropertyRef Name="CertificateNumber" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -306,10 +426,10 @@
     <End Role="SupplyOfProduct" Type="Self.SupplyOfProduct" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Supply">
-        <PropertyRef Name="Number" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SupplyOfProduct">
-        <PropertyRef Name="SupplyNumber" />
+        <PropertyRef Name="SupplyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -325,6 +445,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Warehouse_Operator">
+    <End Role="Operator" Type="Self.Operator" Multiplicity="1" />
+    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operator">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Warehouse">
+        <PropertyRef Name="OperatorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="AverinWarehouseDbModelStoreContainer">
     <EntitySet Name="Certificate" EntityType="Self.Certificate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
@@ -336,6 +468,8 @@
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShipmentContract" EntityType="Self.ShipmentContract" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShipmentOfProduct" EntityType="Self.ShipmentOfProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supply" EntityType="Self.Supply" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplyContract" EntityType="Self.SupplyContract" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplyOfProduct" EntityType="Self.SupplyOfProduct" Schema="dbo" store:Type="Tables" />
@@ -362,8 +496,24 @@
       <End Role="Country" EntitySet="Country" />
       <End Role="Provider" EntitySet="Provider" />
     </AssociationSet>
+    <AssociationSet Name="FK_Shipment_Client" Association="Self.FK_Shipment_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Shipment" EntitySet="Shipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipment_Operator" Association="Self.FK_Shipment_Operator">
+      <End Role="Operator" EntitySet="Operator" />
+      <End Role="Shipment" EntitySet="Shipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipment_Provider" Association="Self.FK_Shipment_Provider">
+      <End Role="Provider" EntitySet="Provider" />
+      <End Role="Shipment" EntitySet="Shipment" />
+    </AssociationSet>
     <AssociationSet Name="FK_Shipment_ShipmentContract" Association="Self.FK_Shipment_ShipmentContract">
       <End Role="ShipmentContract" EntitySet="ShipmentContract" />
+      <End Role="Shipment" EntitySet="Shipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipment_Status" Association="Self.FK_Shipment_Status">
+      <End Role="Status" EntitySet="Status" />
       <End Role="Shipment" EntitySet="Shipment" />
     </AssociationSet>
     <AssociationSet Name="FK_Shipment_Warehouse" Association="Self.FK_Shipment_Warehouse">
@@ -374,21 +524,37 @@
       <End Role="Operator" EntitySet="Operator" />
       <End Role="ShipmentContract" EntitySet="ShipmentContract" />
     </AssociationSet>
-    <AssociationSet Name="FK_Supply_Client" Association="Self.FK_Supply_Client">
-      <End Role="Client" EntitySet="Client" />
+    <AssociationSet Name="FK_ShipmentOfProduct_Certificate" Association="Self.FK_ShipmentOfProduct_Certificate">
+      <End Role="Certificate" EntitySet="Certificate" />
+      <End Role="ShipmentOfProduct" EntitySet="ShipmentOfProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShipmentOfProduct_Shipment" Association="Self.FK_ShipmentOfProduct_Shipment">
+      <End Role="Shipment" EntitySet="Shipment" />
+      <End Role="ShipmentOfProduct" EntitySet="ShipmentOfProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supply_Operator" Association="Self.FK_Supply_Operator">
+      <End Role="Operator" EntitySet="Operator" />
       <End Role="Supply" EntitySet="Supply" />
     </AssociationSet>
     <AssociationSet Name="FK_Supply_Provider" Association="Self.FK_Supply_Provider">
       <End Role="Provider" EntitySet="Provider" />
       <End Role="Supply" EntitySet="Supply" />
     </AssociationSet>
+    <AssociationSet Name="FK_Supply_Status" Association="Self.FK_Supply_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Supply" EntitySet="Supply" />
+    </AssociationSet>
     <AssociationSet Name="FK_Supply_SupplyContract" Association="Self.FK_Supply_SupplyContract">
       <End Role="SupplyContract" EntitySet="SupplyContract" />
       <End Role="Supply" EntitySet="Supply" />
     </AssociationSet>
-    <AssociationSet Name="FK_SupplyContract_Operator" Association="Self.FK_SupplyContract_Operator">
-      <End Role="Operator" EntitySet="Operator" />
-      <End Role="SupplyContract" EntitySet="SupplyContract" />
+    <AssociationSet Name="FK_Supply_Warehouse" Association="Self.FK_Supply_Warehouse">
+      <End Role="Warehouse" EntitySet="Warehouse" />
+      <End Role="Supply" EntitySet="Supply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplyOfProduct_Certificate" Association="Self.FK_SupplyOfProduct_Certificate">
+      <End Role="Certificate" EntitySet="Certificate" />
+      <End Role="SupplyOfProduct" EntitySet="SupplyOfProduct" />
     </AssociationSet>
     <AssociationSet Name="FK_SupplyOfProduct_Product" Association="Self.FK_SupplyOfProduct_Product">
       <End Role="Product" EntitySet="Product" />
@@ -401,6 +567,10 @@
     <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
       <End Role="Role" EntitySet="Role" />
       <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Warehouse_Operator" Association="Self.FK_Warehouse_Operator">
+      <End Role="Operator" EntitySet="Operator" />
+      <End Role="Warehouse" EntitySet="Warehouse" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
