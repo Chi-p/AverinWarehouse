@@ -27,5 +27,21 @@ namespace AverinApp.Entities
                 return $"{greeting}, {Login}!";
             }
         }
+
+        public string Warehouse
+        {
+            get
+            {
+                if (Operator != null)
+                {
+                    if (Operator.Warehouse.Count != 0)
+                        return Operator.Warehouse.First().Name;
+                    else
+                        return "Не назначен";
+                }
+                else
+                    return "";
+            }
+        }
     }
 }

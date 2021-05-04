@@ -12,7 +12,7 @@
           <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="DateStart" Type="datetime" Nullable="false" />
           <Property Name="DateEnd" Type="datetime" Nullable="false" />
-          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="ManufacturerId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Client">
@@ -172,7 +172,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Capacity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="OperatorId" Type="int" Nullable="false" />
+          <Property Name="OperatorId" Type="int" />
         </EntityType>
         <Association Name="FK_Certificate_Manufacturer">
           <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
@@ -451,7 +451,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Warehouse_Operator">
-          <End Role="Operator" Type="Self.Operator" Multiplicity="1" />
+          <End Role="Operator" Type="Self.Operator" Multiplicity="0..1" />
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Operator">
@@ -705,7 +705,7 @@
           <Property Name="Number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ManufacturerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Manufacturer" Relationship="AverinWarehouseDbModel.FK_Certificate_Manufacturer" FromRole="Certificate" ToRole="Manufacturer" />
           <NavigationProperty Name="Product" Relationship="AverinWarehouseDbModel.FK_Product_Certificate" FromRole="Certificate" ToRole="Product" />
@@ -910,7 +910,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Capacity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="OperatorId" Type="Int32" Nullable="false" />
+          <Property Name="OperatorId" Type="Int32" />
           <NavigationProperty Name="Operator" Relationship="AverinWarehouseDbModel.FK_Warehouse_Operator" FromRole="Warehouse" ToRole="Operator" />
           <NavigationProperty Name="Shipment" Relationship="AverinWarehouseDbModel.FK_Shipment_Warehouse" FromRole="Warehouse" ToRole="Shipment" />
           <NavigationProperty Name="Supply" Relationship="AverinWarehouseDbModel.FK_Supply_Warehouse" FromRole="Warehouse" ToRole="Supply" />
@@ -1048,7 +1048,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Warehouse_Operator">
-          <End Type="AverinWarehouseDbModel.Operator" Role="Operator" Multiplicity="1" />
+          <End Type="AverinWarehouseDbModel.Operator" Role="Operator" Multiplicity="0..1" />
           <End Type="AverinWarehouseDbModel.Warehouse" Role="Warehouse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Operator">

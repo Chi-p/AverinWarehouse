@@ -25,7 +25,7 @@ namespace AverinApp.Entities
         public string Name { get; set; }
         public string Address { get; set; }
         public decimal Capacity { get; set; }
-        public int OperatorId { get; set; }
+        public Nullable<int> OperatorId { get; set; }
     
         public virtual Operator Operator { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

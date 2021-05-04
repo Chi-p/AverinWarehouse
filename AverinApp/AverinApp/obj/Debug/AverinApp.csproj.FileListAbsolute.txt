@@ -56,3 +56,12 @@ F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\AdminPa
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\AdminPages\ProductsPage.g.cs
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\AdminPages\AdminMenuPage.baml
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\AdminPages\ProductsPage.baml
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\AdminPages\WarehousesPage.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\AdminPages\WarehousesPage.baml
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddWarehouseWindow.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddWarehouseWindow.baml
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\AdminPages\OperatorsPage.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddOperatorWindow.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\AdminPages\OperatorsPage.baml
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddOperatorWindow.baml

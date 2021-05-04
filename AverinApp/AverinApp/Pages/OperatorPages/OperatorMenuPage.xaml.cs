@@ -22,7 +22,7 @@ namespace AverinApp.Pages.OperatorPages
     /// </summary>
     public partial class OperatorMenuPage : Page
     {
-        DispatcherTimer _timer = new DispatcherTimer();
+        readonly DispatcherTimer _timer = new DispatcherTimer();
         public OperatorMenuPage()
         {
             InitializeComponent();
@@ -90,7 +90,7 @@ namespace AverinApp.Pages.OperatorPages
 
         private void BtnSupply_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new SupplyPage());
+            NavigationService.Navigate(new SupplyPage(AppData.CurrentUser.Operator.Warehouse.First()));
         }
 
         private void BtnShipment_Click(object sender, RoutedEventArgs e)

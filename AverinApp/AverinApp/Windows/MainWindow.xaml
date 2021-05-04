@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AverinApp.Windows"
         mc:Ignorable="d"
         Title="{Binding ElementName=MainFrame,Path=Content.Title}" 
-        MinHeight="600" Height="600" MinWidth="1000" Width="1000" Loaded="Window_Loaded">
+        MinHeight="600" Height="600" MinWidth="1000" Width="1000" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     
     <Grid>
         <Grid.RowDefinitions>

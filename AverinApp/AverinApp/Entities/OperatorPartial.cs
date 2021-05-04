@@ -14,6 +14,7 @@ namespace AverinApp.Entities
             {
                 return $"{LastName} {FirstName} {Patronymic}";
             }
+            set { }
         }
 
         public string Greeting

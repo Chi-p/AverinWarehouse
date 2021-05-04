@@ -26,11 +26,11 @@ namespace AverinApp.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        Properties.Settings _settings = Properties.Settings.Default;
-        DateTime _timeStart = DateTime.Now;
-        TimeSpan _timeLeft = new TimeSpan();
-        DispatcherTimer _workTimer = new DispatcherTimer();
-        DispatcherTimer _operatorTimer = new DispatcherTimer();
+        private readonly Properties.Settings _settings = Properties.Settings.Default;
+        private readonly DateTime _timeStart = DateTime.Now;
+        private TimeSpan _timeLeft = new TimeSpan();
+        private readonly DispatcherTimer _workTimer = new DispatcherTimer();
+        private readonly DispatcherTimer _operatorTimer = new DispatcherTimer();
 
         public MainWindow()
         {

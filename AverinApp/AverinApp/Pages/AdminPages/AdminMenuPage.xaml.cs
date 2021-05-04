@@ -31,5 +31,15 @@ namespace AverinApp.Pages.AdminPages
         {
             NavigationService.Navigate(new ProductsPage());
         }
+
+        private void BtnWarehouses_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new WarehousesPage());
+        }
+
+        private void BtnOperators_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OperatorsPage());
+        }
     }
 }

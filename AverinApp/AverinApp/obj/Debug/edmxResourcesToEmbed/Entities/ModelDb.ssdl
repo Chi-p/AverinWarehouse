@@ -7,7 +7,7 @@
     <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="DateStart" Type="datetime" Nullable="false" />
     <Property Name="DateEnd" Type="datetime" Nullable="false" />
-    <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Photo" Type="varbinary(max)" />
     <Property Name="ManufacturerId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Client">
@@ -167,7 +167,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Capacity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="OperatorId" Type="int" Nullable="false" />
+    <Property Name="OperatorId" Type="int" />
   </EntityType>
   <Association Name="FK_Certificate_Manufacturer">
     <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
@@ -446,7 +446,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Warehouse_Operator">
-    <End Role="Operator" Type="Self.Operator" Multiplicity="1" />
+    <End Role="Operator" Type="Self.Operator" Multiplicity="0..1" />
     <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Operator">

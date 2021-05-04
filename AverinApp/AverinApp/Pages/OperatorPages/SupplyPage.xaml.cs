@@ -22,10 +22,13 @@ namespace AverinApp.Pages.OperatorPages
     public partial class SupplyPage : Page
     {
         private List<Supply> _supplies = new List<Supply>();
+        private readonly Warehouse _warehouse;
 
-        public SupplyPage()
+        public SupplyPage(Warehouse warehouse)
         {
             InitializeComponent();
+            _warehouse = warehouse;
+            Title = "Оператор. Отгрузка товаров на " + _warehouse.Name.ToLower();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -39,7 +42,7 @@ namespace AverinApp.Pages.OperatorPages
             AppData.Context.ChangeTracker.Entries<SupplyContract>().ToList().ForEach(i => i.Reload());
             AppData.Context.ChangeTracker.Entries<SupplyOfProduct>().ToList().ForEach(i => i.Reload());
 
-            _supplies = AppData.Context.Supply.ToList();
+            _supplies = AppData.Context.Supply.ToList().Where(i => i.Warehouse == _warehouse).ToList();
 
             foreach (var item in _supplies.Where(i => i.Status.Name == "В пути"))
             {

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:AverinApp.Pages.OperatorPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1000"
-      Title="Отгрузка товаров на склад" Loaded="Page_Loaded">
+      Title="Оператор. Отгрузка товаров на склад" Loaded="Page_Loaded">
 
     <Grid>
         <TabControl Margin="10" BorderBrush="{StaticResource PColor_Second}">
