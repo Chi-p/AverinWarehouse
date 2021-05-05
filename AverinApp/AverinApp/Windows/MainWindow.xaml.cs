@@ -74,7 +74,7 @@ namespace AverinApp.Windows
                 BtnLogout.Visibility = Visibility.Visible;
             }
 
-            if (Title == "Авторизация" || Title == "Оператор. Главное меню")
+            if (Title == "Авторизация" || Title == "Оператор. Главное меню" || Title == "Администратор. Главное меню")
                 BtnBack.Visibility = Visibility.Collapsed;
             else
                 BtnBack.Visibility = Visibility.Visible;

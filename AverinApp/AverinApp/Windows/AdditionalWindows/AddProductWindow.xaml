@@ -1,0 +1,75 @@
+﻿<Window x:Class="AverinApp.Windows.AdditionalWindows.AddProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AverinApp.Windows.AdditionalWindows"
+        mc:Ignorable="d"
+        Title="AddProductWindow" Height="450" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="10" VerticalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Номер" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                    <TextBox Width="auto" Padding="0 5.5" Name="TbxNumber" IsReadOnly="True" Background="#FFEEEEEE"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Название" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                    <TextBox Width="auto" Padding="0 5.5" Name="TbxName"/>
+                </StackPanel>
+            </Grid>
+            <TextBlock Text="Описание" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+            <TextBox Width="auto" Padding="0 5.5" Name="TbxDescription" TextWrapping="Wrap" Height="80" VerticalScrollBarVisibility="Visible"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Вес" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                    <TextBox Width="auto" Padding="0 5.5" Name="TbxWeight" PreviewTextInput="Tbx_PreviewTextInput"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Единица измерения" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                    <TextBox Width="auto" Padding="0 5.5" Name="TbxUnit"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Цена" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                    <TextBox Width="auto" Padding="0 5.5" Name="TbxPrice" PreviewTextInput="Tbx_PreviewTextInput"/>
+                </StackPanel>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Сертификат" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                        <TextBlock Text="ⓘ" Style="{StaticResource TbkBody}" Margin="5 5 5 0" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseLeftButtonDown" 
+                                   ToolTip="Для просмотра дополнительной информации&#10;нажмите левую кнопку мыши" FontSize="24" Cursor="Hand" Name="TbkCertificateInfo"/>
+                    </StackPanel>
+                    <TextBox Width="auto" Padding="0 5.5" Name="TbxCertificate" IsReadOnly="True" Background="#FFEEEEEE"
+                             Height="55" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" />
+                </StackPanel>
+                <Button Grid.Column="1" VerticalAlignment="Bottom" Margin="5 5 5 15" Content="Добавить сертификат" Width="auto" 
+                        Padding="10 6.5" Name="BtnAddCertificate" Click="BtnAddCertificate_Click"/>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button Padding="15 4" Width="auto" Content="Сохранить" Name="BtnSave" Click="BtnSave_Click"/>
+            <Button Padding="15 4" Width="auto" Content="Отмена" Name="BtnCancel" Click="BtnCancel_Click" Style="{StaticResource BtnCancel}"/>
+        </StackPanel>
+    </Grid>
+</Window>

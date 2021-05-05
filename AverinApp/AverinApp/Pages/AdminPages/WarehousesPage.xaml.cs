@@ -50,6 +50,10 @@ namespace AverinApp.Pages.AdminPages
 
         private void Update()
         {
+            AppData.Context.ChangeTracker.Entries<Warehouse>().ToList().ForEach(i => i.Reload());
+            AppData.Context.ChangeTracker.Entries<Operator>().ToList().ForEach(i => i.Reload());
+            AppData.Context.ChangeTracker.Entries<User>().ToList().ForEach(i => i.Reload());
+
             List<Warehouse> warehouses = AppData.Context.Warehouse.ToList();
 
             if (!string.IsNullOrWhiteSpace(TbxSearch.Text))
@@ -88,13 +92,20 @@ namespace AverinApp.Pages.AdminPages
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var warehouse = (sender as Button).DataContext as Warehouse;
-            if (AppData.Message.Question($"Вы уверены что хотите удалить {warehouse.Name.ToLower()}?") == MessageBoxResult.Yes)
+            try
             {
-                AppData.Context.Warehouse.Remove(warehouse);
-                AppData.Context.SaveChanges();
-                Update();
-            }    
+                var warehouse = (sender as Button).DataContext as Warehouse;
+                if (AppData.Message.Question($"Вы уверены что хотите удалить {warehouse.Name.ToLower()}?") == MessageBoxResult.Yes)
+                {
+                    AppData.Context.Warehouse.Remove(warehouse);
+                    AppData.Context.SaveChanges();
+                    Update();
+                }
+            }
+            catch 
+            {
+                AppData.Message.Error("Невозможно удалить склад, т.к. он фигурирует в других записях.");
+            }
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)

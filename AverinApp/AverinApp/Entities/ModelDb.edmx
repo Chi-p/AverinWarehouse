@@ -60,6 +60,7 @@
           <Property Name="MeasureUnit" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Weight" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="CertificateNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Provider">
           <Key>
@@ -88,7 +89,7 @@
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="ProviderId" Type="int" Nullable="false" />
           <Property Name="ClientId" Type="int" Nullable="false" />
-          <Property Name="OperatorId" Type="int" />
+          <Property Name="OperatorId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ShipmentContract">
           <Key>
@@ -96,7 +97,7 @@
           </Key>
           <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="OperatorId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="15" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="ShipmentOfProduct">
           <Key>
@@ -106,7 +107,6 @@
           <Property Name="ShipmentId" Type="int" Nullable="false" />
           <Property Name="ProductNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Count" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="CertificateNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Status">
@@ -133,6 +133,7 @@
           </Key>
           <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="15" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="SupplyOfProduct">
           <Key>
@@ -141,7 +142,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SupplyId" Type="int" Nullable="false" />
           <Property Name="ProductNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Count" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="CertificateNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
@@ -247,7 +247,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Shipment_Operator">
-          <End Role="Operator" Type="Self.Operator" Multiplicity="0..1" />
+          <End Role="Operator" Type="Self.Operator" Multiplicity="1" />
           <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Operator">
@@ -303,18 +303,6 @@
             </Principal>
             <Dependent Role="Shipment">
               <PropertyRef Name="WarehouseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ShipmentContract_Operator">
-          <End Role="Operator" Type="Self.Operator" Multiplicity="1" />
-          <End Role="ShipmentContract" Type="Self.ShipmentContract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Operator">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ShipmentContract">
-              <PropertyRef Name="OperatorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -525,10 +513,6 @@
             <End Role="Warehouse" EntitySet="Warehouse" />
             <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
-          <AssociationSet Name="FK_ShipmentContract_Operator" Association="Self.FK_ShipmentContract_Operator">
-            <End Role="Operator" EntitySet="Operator" />
-            <End Role="ShipmentContract" EntitySet="ShipmentContract" />
-          </AssociationSet>
           <AssociationSet Name="FK_ShipmentOfProduct_Certificate" Association="Self.FK_ShipmentOfProduct_Certificate">
             <End Role="Certificate" EntitySet="Certificate" />
             <End Role="ShipmentOfProduct" EntitySet="ShipmentOfProduct" />
@@ -636,10 +620,6 @@
           <AssociationSet Name="FK_Shipment_Operator" Association="AverinWarehouseDbModel.FK_Shipment_Operator">
             <End Role="Operator" EntitySet="Operator" />
             <End Role="Shipment" EntitySet="Shipment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ShipmentContract_Operator" Association="AverinWarehouseDbModel.FK_ShipmentContract_Operator">
-            <End Role="Operator" EntitySet="Operator" />
-            <End Role="ShipmentContract" EntitySet="ShipmentContract" />
           </AssociationSet>
           <AssociationSet Name="FK_Supply_Operator" Association="AverinWarehouseDbModel.FK_Supply_Operator">
             <End Role="Operator" EntitySet="Operator" />
@@ -753,7 +733,6 @@
           <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="AverinWarehouseDbModel.FK_Operator_User" FromRole="Operator" ToRole="User" />
           <NavigationProperty Name="Shipment" Relationship="AverinWarehouseDbModel.FK_Shipment_Operator" FromRole="Operator" ToRole="Shipment" />
-          <NavigationProperty Name="ShipmentContract" Relationship="AverinWarehouseDbModel.FK_ShipmentContract_Operator" FromRole="Operator" ToRole="ShipmentContract" />
           <NavigationProperty Name="Supply" Relationship="AverinWarehouseDbModel.FK_Supply_Operator" FromRole="Operator" ToRole="Supply" />
           <NavigationProperty Name="Warehouse" Relationship="AverinWarehouseDbModel.FK_Warehouse_Operator" FromRole="Operator" ToRole="Warehouse" />
         </EntityType>
@@ -767,6 +746,7 @@
           <Property Name="MeasureUnit" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Weight" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="CertificateNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <NavigationProperty Name="Certificate" Relationship="AverinWarehouseDbModel.FK_Product_Certificate" FromRole="Product" ToRole="Certificate" />
           <NavigationProperty Name="SupplyOfProduct" Relationship="AverinWarehouseDbModel.FK_SupplyOfProduct_Product" FromRole="Product" ToRole="SupplyOfProduct" />
         </EntityType>
@@ -801,7 +781,7 @@
           <Property Name="StatusId" Type="Int32" Nullable="false" />
           <Property Name="ProviderId" Type="Int32" Nullable="false" />
           <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="OperatorId" Type="Int32" />
+          <Property Name="OperatorId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="AverinWarehouseDbModel.FK_Shipment_Client" FromRole="Shipment" ToRole="Client" />
           <NavigationProperty Name="Operator" Relationship="AverinWarehouseDbModel.FK_Shipment_Operator" FromRole="Shipment" ToRole="Operator" />
           <NavigationProperty Name="Provider" Relationship="AverinWarehouseDbModel.FK_Shipment_Provider" FromRole="Shipment" ToRole="Provider" />
@@ -816,8 +796,7 @@
           </Key>
           <Property Name="Number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="OperatorId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Operator" Relationship="AverinWarehouseDbModel.FK_ShipmentContract_Operator" FromRole="ShipmentContract" ToRole="Operator" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
           <NavigationProperty Name="Shipment" Relationship="AverinWarehouseDbModel.FK_Shipment_ShipmentContract" FromRole="ShipmentContract" ToRole="Shipment" />
         </EntityType>
         <EntityType Name="ShipmentOfProduct">
@@ -828,7 +807,6 @@
           <Property Name="ShipmentId" Type="Int32" Nullable="false" />
           <Property Name="ProductNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="CertificateNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Certificate" Relationship="AverinWarehouseDbModel.FK_ShipmentOfProduct_Certificate" FromRole="ShipmentOfProduct" ToRole="Certificate" />
           <NavigationProperty Name="Shipment" Relationship="AverinWarehouseDbModel.FK_ShipmentOfProduct_Shipment" FromRole="ShipmentOfProduct" ToRole="Shipment" />
@@ -865,6 +843,7 @@
           </Key>
           <Property Name="Number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
           <NavigationProperty Name="Supply" Relationship="AverinWarehouseDbModel.FK_Supply_SupplyContract" FromRole="SupplyContract" ToRole="Supply" />
         </EntityType>
         <EntityType Name="SupplyOfProduct">
@@ -874,7 +853,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SupplyId" Type="Int32" Nullable="false" />
           <Property Name="ProductNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="Count" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="CertificateNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Certificate" Relationship="AverinWarehouseDbModel.FK_SupplyOfProduct_Certificate" FromRole="SupplyOfProduct" ToRole="Certificate" />
@@ -1012,25 +990,13 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Shipment_Operator">
-          <End Type="AverinWarehouseDbModel.Operator" Role="Operator" Multiplicity="0..1" />
+          <End Type="AverinWarehouseDbModel.Operator" Role="Operator" Multiplicity="1" />
           <End Type="AverinWarehouseDbModel.Shipment" Role="Shipment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Operator">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Shipment">
-              <PropertyRef Name="OperatorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ShipmentContract_Operator">
-          <End Type="AverinWarehouseDbModel.Operator" Role="Operator" Multiplicity="1" />
-          <End Type="AverinWarehouseDbModel.ShipmentContract" Role="ShipmentContract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Operator">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ShipmentContract">
               <PropertyRef Name="OperatorId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1262,6 +1228,7 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="AverinWarehouseDbModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="MeasureUnit" ColumnName="MeasureUnit" />
@@ -1306,7 +1273,7 @@
           <EntitySetMapping Name="ShipmentContract">
             <EntityTypeMapping TypeName="AverinWarehouseDbModel.ShipmentContract">
               <MappingFragment StoreEntitySet="ShipmentContract">
-                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
               </MappingFragment>
@@ -1316,7 +1283,6 @@
             <EntityTypeMapping TypeName="AverinWarehouseDbModel.ShipmentOfProduct">
               <MappingFragment StoreEntitySet="ShipmentOfProduct">
                 <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
                 <ScalarProperty Name="ShipmentId" ColumnName="ShipmentId" />
@@ -1347,6 +1313,7 @@
           <EntitySetMapping Name="SupplyContract">
             <EntityTypeMapping TypeName="AverinWarehouseDbModel.SupplyContract">
               <MappingFragment StoreEntitySet="SupplyContract">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
               </MappingFragment>
@@ -1357,7 +1324,6 @@
               <MappingFragment StoreEntitySet="SupplyOfProduct">
                 <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
                 <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

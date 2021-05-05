@@ -22,6 +22,7 @@ namespace AverinApp.Entities
     
         public string Number { get; set; }
         public System.DateTime Date { get; set; }
+        public decimal Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply> Supply { get; set; }

@@ -99,7 +99,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\AdditionalWindows\AddCertificateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AdditionalWindows\AddOperatorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AdditionalWindows\AddProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,6 +129,7 @@
     <Compile Include="Entities\Certificate.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\CertificatePartial.cs" />
     <Compile Include="Entities\Client.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
@@ -152,6 +161,7 @@
     <Compile Include="Entities\Product.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ProductPartial.cs" />
     <Compile Include="Entities\Provider.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
@@ -216,8 +226,14 @@
     <Compile Include="Pages\OperatorPages\SupplyPage.xaml.cs">
       <DependentUpon>SupplyPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\AdditionalWindows\AddCertificateWindow.xaml.cs">
+      <DependentUpon>AddCertificateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AdditionalWindows\AddOperatorWindow.xaml.cs">
       <DependentUpon>AddOperatorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AdditionalWindows\AddProductWindow.xaml.cs">
+      <DependentUpon>AddProductWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\AdditionalWindows\AddWarehouseWindow.xaml.cs">
       <DependentUpon>AddWarehouseWindow.xaml</DependentUpon>
@@ -273,6 +289,7 @@
       <DependentUpon>ModelDb.edmx</DependentUpon>
       <LastGenOutput>ModelDb.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Pictures\certificate.jpg" />
     <Resource Include="Resources\Pictures\pyaterochka_redbackground.png" />
     <Resource Include="Resources\Logos\logo_48x48.ico" />
     <Resource Include="Resources\Logos\logo_256x256.ico" />

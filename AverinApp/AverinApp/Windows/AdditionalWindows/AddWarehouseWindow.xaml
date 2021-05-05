@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AverinApp.Windows.AdditionalWindows"
         mc:Ignorable="d"
-        Title="AddWarehouseWindow" Height="320" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="AddWarehouseWindow" Height="300" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -13,14 +13,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel Margin="10" VerticalAlignment="Center">
-            <StackPanel>
-                <TextBlock Text="Название" Style="{StaticResource TbkBody}"/>
-                <TextBox Width="auto" Padding="0 5.5" Name="TbxName"/>
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Text="Адрес" Style="{StaticResource TbkBody}"/>
-                <TextBox Width="auto" Padding="0 5.5" Name="TbxAdress"/>
-            </StackPanel>
+            <TextBlock Text="Название" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+            <TextBox Width="auto" Padding="0 5.5" Name="TbxName"/>
+            <TextBlock Text="Адрес" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+            <TextBox Width="auto" Padding="0 5.5" Name="TbxAdress"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -28,15 +24,15 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel>
-                    <TextBlock Text="Вместимость" Style="{StaticResource TbkBody}"/>
+                    <TextBlock Text="Вместимость" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
                     <TextBox Width="95" HorizontalAlignment="Left" Padding="0 5.5" MaxLength="10"
                              TextAlignment="Center" Name="TbxCapacity" PreviewTextInput="TbxCapacity_PreviewTextInput"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <TextBlock Text="Оператор" Style="{StaticResource TbkBody}"/>
+                    <TextBlock Text="Оператор" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
                     <ComboBox Width="auto" DisplayMemberPath="FullName" Name="CbxOperator"/>
                 </StackPanel>
-                <Button Grid.Column="2" VerticalAlignment="Bottom" Content="+" Width="32" FontSize="24" Height="32"></Button>
+                <Button Grid.Column="2" VerticalAlignment="Bottom" Content="+" Width="32" FontSize="24" Height="32" Name="BtnAddOperator" Click="BtnAddOperator_Click"/>
             </Grid>
         </StackPanel>
 

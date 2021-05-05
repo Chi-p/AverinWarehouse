@@ -17,7 +17,6 @@ namespace AverinApp.Entities
         public int Id { get; set; }
         public int SupplyId { get; set; }
         public string ProductNumber { get; set; }
-        public decimal Price { get; set; }
         public decimal Count { get; set; }
         public string CertificateNumber { get; set; }
     

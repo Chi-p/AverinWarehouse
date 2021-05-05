@@ -6,9 +6,61 @@
       xmlns:local="clr-namespace:AverinApp.Pages.AdminPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1000"
-      Title="ProductsPage">
+      Title="Администратор. Продукты">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Text="Поиск:"/>
+            <TextBox Name="TbxSearch" Width="150"/>
+            <TextBlock Style="{StaticResource TbkBody}" Text="Сертификаты&#10;в промежутке:"/>
+            <TextBlock Style="{StaticResource TbkBody}" Text="от"/>
+            <DatePicker Name="DpStartDate"/>
+            <TextBlock Style="{StaticResource TbkBody}" Text="до"/>
+            <DatePicker Name="DpEndDate"/>
+            <Button VerticalAlignment="Center" Name="BtnSearch" Content="Поиск" Width="auto" Padding="15 5" Margin="15 5 5 5" Click="BtnSearch_Click"/>
+            <Button VerticalAlignment="Center" Name="BtnClear" Content="Очистить" Width="auto" Padding="15 5" Margin="5 5 5 5" Click="BtnClear_Click" Style="{StaticResource BtnCancel}"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" Name="DGProducts" Margin="15 0 15 10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер" Width="0.5*" Binding="{Binding Number}"/>
+                <DataGridTextColumn Header="Название" Width="1*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Вес" Width="0.5*" Binding="{Binding WeightUnit}"/>
+                <DataGridTextColumn Header="Цена" Width="0.5*" Binding="{Binding Price,StringFormat={}{0}₽}"/>
+                <DataGridTemplateColumn Header="Сертификат">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="BtnCertificate" Click="BtnCertificate_Click" Content="{Binding CertificateState}" BorderBrush="{Binding CertifacateStateColor}" 
+                                    Foreground="{Binding CertifacateStateColor}" Padding="10 3" Width="auto" Background="White" BorderThickness="1" ToolTip="Просмотреть"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="BtnEdit" Click="BtnEdit_Click" Content="Редактировать" Padding="10 3" Width="auto"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="BtnDelete" Click="BtnDelete_Click" Content="Удалить" Width="auto" 
+                                    Padding="10 3" Style="{StaticResource BtnCancel}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="2" HorizontalAlignment="Right" Margin="0 0 15 5" Width="auto" Padding="20 5" 
+                Content="Добавить новый продукт" Name="BtnAdd" VerticalAlignment="Center" Click="BtnAdd_Click"/>
+
     </Grid>
 </Page>

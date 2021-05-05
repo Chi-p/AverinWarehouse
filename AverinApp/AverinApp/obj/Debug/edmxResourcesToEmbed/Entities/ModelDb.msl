@@ -54,6 +54,7 @@
     <EntitySetMapping Name="Product">
       <EntityTypeMapping TypeName="AverinWarehouseDbModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
           <ScalarProperty Name="MeasureUnit" ColumnName="MeasureUnit" />
@@ -98,7 +99,7 @@
     <EntitySetMapping Name="ShipmentContract">
       <EntityTypeMapping TypeName="AverinWarehouseDbModel.ShipmentContract">
         <MappingFragment StoreEntitySet="ShipmentContract">
-          <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Number" ColumnName="Number" />
         </MappingFragment>
@@ -108,7 +109,6 @@
       <EntityTypeMapping TypeName="AverinWarehouseDbModel.ShipmentOfProduct">
         <MappingFragment StoreEntitySet="ShipmentOfProduct">
           <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
           <ScalarProperty Name="ShipmentId" ColumnName="ShipmentId" />
@@ -139,6 +139,7 @@
     <EntitySetMapping Name="SupplyContract">
       <EntityTypeMapping TypeName="AverinWarehouseDbModel.SupplyContract">
         <MappingFragment StoreEntitySet="SupplyContract">
+          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Number" ColumnName="Number" />
         </MappingFragment>
@@ -149,7 +150,6 @@
         <MappingFragment StoreEntitySet="SupplyOfProduct">
           <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
           <ScalarProperty Name="Count" ColumnName="Count" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
           <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
           <ScalarProperty Name="Id" ColumnName="Id" />

@@ -26,6 +26,7 @@ namespace AverinApp.Entities
         public string MeasureUnit { get; set; }
         public decimal Weight { get; set; }
         public string CertificateNumber { get; set; }
+        public decimal Price { get; set; }
     
         public virtual Certificate Certificate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

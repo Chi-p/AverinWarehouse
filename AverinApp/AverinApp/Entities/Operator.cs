@@ -18,7 +18,6 @@ namespace AverinApp.Entities
         public Operator()
         {
             this.Shipment = new HashSet<Shipment>();
-            this.ShipmentContract = new HashSet<ShipmentContract>();
             this.Supply = new HashSet<Supply>();
             this.Warehouse = new HashSet<Warehouse>();
         }
@@ -31,8 +30,6 @@ namespace AverinApp.Entities
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Shipment> Shipment { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShipmentContract> ShipmentContract { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply> Supply { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

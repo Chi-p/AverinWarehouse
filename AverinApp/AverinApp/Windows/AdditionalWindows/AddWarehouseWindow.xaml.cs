@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,11 +22,11 @@ namespace AverinApp.Windows.AdditionalWindows
     public partial class AddWarehouseWindow : Window
     {
         private Warehouse _warehouse = new Warehouse();
-
+        private List<Operator> _operators;
+        public static Operator _newOperator;
         public AddWarehouseWindow(Warehouse warehouse)
         {
             InitializeComponent();
-
             _warehouse = warehouse;
             Load();
         }
@@ -57,41 +58,36 @@ namespace AverinApp.Windows.AdditionalWindows
             AppData.Context.ChangeTracker.Entries<Operator>().ToList().ForEach(i => i.Reload());
             AppData.Context.ChangeTracker.Entries<User>().ToList().ForEach(i => i.Reload());
 
-            List<Operator> operators = AppData.Context.Operator.ToList();
-            operators.Insert(0, new Operator
+            _operators = AppData.Context.Operator.ToList();
+            _operators.Insert(0, new Operator
             {
                 LastName = "Не",
                 FirstName = "назначен"
             });
 
-            CbxOperator.ItemsSource = operators;
+            CbxOperator.ItemsSource = _operators;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TbxName.Text) || string.IsNullOrWhiteSpace(TbxAdress.Text) || Decimal.Parse(TbxCapacity.Text) == 0
-                || AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Address == TbxAdress.Text && i.Address != _warehouse.Address) != null
-                || AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Operator == CbxOperator.SelectedItem as Operator && i.Operator != _warehouse.Operator) != null
-                || AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Name == _warehouse.Name && i.Name != _warehouse.Name) != null || string.IsNullOrWhiteSpace(TbxCapacity.Text))
+            if (string.IsNullOrWhiteSpace(TbxName.Text) || string.IsNullOrWhiteSpace(TbxAdress.Text)
+                || Decimal.Parse(TbxCapacity.Text) == 0 || string.IsNullOrWhiteSpace(TbxCapacity.Text)
+                || AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Operator == CbxOperator.SelectedItem as Operator) != null)
             {
                 string error = "Ошибки ввода:\n";
 
                 if (string.IsNullOrWhiteSpace(TbxName.Text))
                     error += "Название склада не может быть пустым\n";
-                else if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Name == TbxName.Text && i.Name != _warehouse.Name) != null)
-                    error += "Склад с таким названием уже сущуствует\n";
 
                 if (string.IsNullOrWhiteSpace(TbxAdress.Text))
                     error += "Адрес склада не может быть пустым\n";
-                else if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Address == TbxAdress.Text && i.Address != _warehouse.Address) != null)
-                    error += "Склад с таким адресом уже сущуствует\n";
 
                 if (string.IsNullOrWhiteSpace(TbxCapacity.Text))
                     error += "Вместимость склада не может быть пустой\n";
                 else if (Decimal.Parse(TbxCapacity.Text) == 0)
                     error += "Вместимость не может быть равна 0\n";
 
-                if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Operator == CbxOperator.SelectedItem as Operator && i.Operator != _warehouse.Operator) != null)
+                if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Operator == CbxOperator.SelectedItem as Operator) != null)
                     error += "Оператор уже работает на другом складе";
 
                 AppData.Message.Error(error);
@@ -105,6 +101,7 @@ namespace AverinApp.Windows.AdditionalWindows
                 {
                     _warehouse = new Warehouse
                     {
+
                         Name = TbxName.Text,
                         Address = TbxAdress.Text,
                         Capacity = (Decimal.Parse(TbxCapacity.Text)),
@@ -114,12 +111,29 @@ namespace AverinApp.Windows.AdditionalWindows
                 }
                 else
                 {
+                    if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Operator == CbxOperator.SelectedItem as Operator && i.Operator != _warehouse.Operator) != null)
+                    {
+                        AppData.Message.Error("Оператор уже работает на другом складе");
+                        return;
+                    }
+                    if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Address == TbxAdress.Text && i.Address != _warehouse.Address) != null)
+                    {
+                        AppData.Message.Error("Склад с таким адресом уже сущуствует");
+                        return;
+                    }
+                    if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Address == TbxAdress.Text && i.Address != _warehouse.Address) != null)
+                    {
+                        AppData.Message.Error("Склад с таким адресом уже сущуствует");
+                        return;
+                    }
+
                     _warehouse.Name = TbxName.Text;
                     _warehouse.Address = TbxAdress.Text;
                     _warehouse.Capacity = (Decimal.Parse(TbxCapacity.Text));
                     _warehouse.Operator = CbxOperator.SelectedItem as Operator;
                 }
                 AppData.Context.SaveChanges();
+                AppData.Message.Info("Склад успешно сохранён!");
                 Close();
             }
         }
@@ -136,6 +150,23 @@ namespace AverinApp.Windows.AdditionalWindows
                 e.Handled = true;
             else if (e.Text[0] != '.' && !Char.IsDigit(e.Text, 0))
                 e.Handled = true;
+        }
+
+        private void BtnAddOperator_Click(object sender, RoutedEventArgs e)
+        {
+            AddOperatorWindow window = new AddOperatorWindow(null, "Warehouse")
+            {
+                Owner = Window.GetWindow(this)
+            };
+            window.ShowDialog();
+
+            AppData.Context.ChangeTracker.Entries<Operator>().ToList().ForEach(i => i.Reload());
+            AppData.Context.ChangeTracker.Entries<User>().ToList().ForEach(i => i.Reload());
+            _operators = AppData.Context.Operator.ToList();
+            CbxOperator.ItemsSource = null;
+            CbxOperator.ItemsSource = _operators;
+            if (_newOperator != null)
+                CbxOperator.SelectedItem = AppData.Context.Operator.ToList().FirstOrDefault(i => i.User.Login == _newOperator.User.Login);
         }
     }
 }

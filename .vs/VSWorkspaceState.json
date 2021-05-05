@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\AverinApp",
+    "\\AverinApp\\AverinApp",
+    "\\AverinApp\\AverinApp\\Windows",
+    "\\AverinApp\\AverinApp\\Windows\\AdditionalWindows"
   ],
+  "SelectedNode": "\\AverinApp\\AverinApp.sln",
   "PreviewInSolutionExplorer": false
 }

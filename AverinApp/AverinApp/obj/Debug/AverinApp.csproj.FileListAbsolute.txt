@@ -63,3 +63,8 @@ F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\AverinApp.csp
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\AverinApp.csproj.CopyComplete
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\AverinApp.exe
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\AverinApp.pdb
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\AverinApp.csprojAssemblyReference.cache
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddProductWindow.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddProductWindow.baml
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddCertificateWindow.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddCertificateWindow.baml

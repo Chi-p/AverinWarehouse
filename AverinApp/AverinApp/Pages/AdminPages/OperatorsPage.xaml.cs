@@ -47,6 +47,10 @@ namespace AverinApp.Pages.AdminPages
 
         private void Update()
         {
+            AppData.Context.ChangeTracker.Entries<Warehouse>().ToList().ForEach(i => i.Reload());
+            AppData.Context.ChangeTracker.Entries<Operator>().ToList().ForEach(i => i.Reload());
+            AppData.Context.ChangeTracker.Entries<User>().ToList().ForEach(i => i.Reload());
+
             List<User> operators = AppData.Context.User.ToList().Where(i => i.Operator != null).ToList();
 
             if (!string.IsNullOrWhiteSpace(TbxSearch.Text))
@@ -81,7 +85,7 @@ namespace AverinApp.Pages.AdminPages
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            AddOperatorWindow window = new AddOperatorWindow((sender as Button).DataContext as User)
+            AddOperatorWindow window = new AddOperatorWindow((sender as Button).DataContext as User, "Operator")
             {
                 Owner = Window.GetWindow(this)
             };
@@ -91,18 +95,25 @@ namespace AverinApp.Pages.AdminPages
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var user = (sender as Button).DataContext as User;
-            if (AppData.Message.Question($"Вы уверены что хотите удалить оператора \n{user.Operator.FullName}?") == MessageBoxResult.Yes)
+            try
             {
-                AppData.Context.User.Remove(user);
-                AppData.Context.SaveChanges();
-                Update();
+                var user = (sender as Button).DataContext as User;
+                if (AppData.Message.Question($"Вы уверены что хотите удалить оператора \n{user.Operator.FullName}?") == MessageBoxResult.Yes)
+                {
+                    AppData.Context.User.Remove(user);
+                    AppData.Context.SaveChanges();
+                    Update();
+                }
+            }
+            catch
+            {
+                AppData.Message.Error("Невозможно удалить оператора, т.к. он фигурирует в других записях.");
             }
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            AddOperatorWindow window = new AddOperatorWindow(null)
+            AddOperatorWindow window = new AddOperatorWindow(null, "Operator")
             {
                 Owner = Window.GetWindow(this)
             };

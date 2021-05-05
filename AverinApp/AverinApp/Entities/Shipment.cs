@@ -26,7 +26,7 @@ namespace AverinApp.Entities
         public int StatusId { get; set; }
         public int ProviderId { get; set; }
         public int ClientId { get; set; }
-        public Nullable<int> OperatorId { get; set; }
+        public int OperatorId { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Operator Operator { get; set; }

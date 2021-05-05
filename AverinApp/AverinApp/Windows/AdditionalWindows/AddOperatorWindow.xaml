@@ -5,8 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AverinApp.Windows.AdditionalWindows"
         mc:Ignorable="d"
-        Title="AddOperatorWindow" Height="450" Width="800">
+        Title="AddOperatorWindow" Height="365" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="10" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource TbkBody}" FontSize="24" Margin="5 5 5 20" Text="Контактные данные" TextAlignment="Center"/>
+                <TextBlock Text="Фамилия" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                <TextBox Width="auto" Padding="0 5.5" Name="TbxLastName"/>
+                <TextBlock Text="Имя" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                <TextBox Width="auto" Padding="0 5.5" Name="TbxFirstName"/>
+                <TextBlock Text="Отчество" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                <TextBox Width="auto" Padding="0 5.5" Name="TbxPatronymic"/>
+            </StackPanel>
+
+            <StackPanel Margin="10" VerticalAlignment="Center" Grid.Column="1">
+                <TextBlock Style="{StaticResource TbkBody}" FontSize="24" Margin="5 5 5 20" Text="Регистрационные данные" TextAlignment="Center"/>
+                <TextBlock Text="Логин" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                <TextBox Width="auto" Padding="0 5.5" Name="TbxLogin"/>
+                <TextBlock Text="Пароль" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                <PasswordBox Width="auto" Padding="0 5.5" Name="PbxPassword"/>
+                <TextBlock Text="Повторите пароль" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                <PasswordBox Width="auto" Padding="0 5.5" Name="PbxRePassword"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                <Button Padding="15 4" Width="auto" Content="Сохранить" Name="BtnSave" Click="BtnSave_Click"/>
+                <Button Padding="15 4" Width="auto" Content="Отмена" Name="BtnCancel" Click="BtnCancel_Click" Style="{StaticResource BtnCancel}"/>
+            </StackPanel>
+
+        </Grid>
         
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource PColor_White}" 
+                BorderBrush="{StaticResource PColor_Black}" Visibility="Hidden" BorderThickness="1" Name="BdrWarehouse">
+            <StackPanel Margin="10" VerticalAlignment="Center" Grid.Column="1">
+                <TextBlock Style="{StaticResource TbkBody}" FontSize="24" Margin="5 5 5 20" Text="Назначить на склад" TextAlignment="Center"/>
+                <TextBlock Text="Склад" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+                <ComboBox Width="300" Padding="0 5.5" Name="CbxWarehouse" DisplayMemberPath="Name"/>
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="5 15 5 0">
+                    <Button Padding="15 4" Width="auto" Content="Назначить" Name="BtnSetWarehouse" Click="BtnSetWarehouse_Click"/>
+                    <Button Padding="15 4" Width="auto" Content="Не назначать" Name="BtnIgnore" Click="BtnIgnore_Click" Style="{StaticResource BtnCancel}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
