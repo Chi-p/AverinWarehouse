@@ -9,26 +9,72 @@ using System.Windows.Media;
 namespace AverinApp.Entities
 {
     public partial class SupplyOfProduct
-    {      
-        public string CertifacateState
+    {
+        public string CertificateState
         {
             get
             {
-                if (AppData.Context.Product.Where(i => i.CertificateNumber == CertificateNumber) == null)
-                    return $"новый - до {Certificate.DateEnd:dd MMMM yyyy г.}";
-
-                return $"до {Certificate.DateEnd:dd MMMM yyyy г.}";
+                return $"до {Product.Certificate.DateEnd:dd MMMM yyyy г.}";
             }
         }
 
-        public Brush CertifacateStateColor
+        private bool _checked;
+        public bool Checked
+        {
+            get => _checked;
+            set
+            {
+                _checked = value;
+                if (Checked)
+                {
+                    if (Supply.Warehouse.WarehouseOfProduct.ToList().FirstOrDefault(i => i.Product == Product) == null)
+                        Supply.Warehouse.WarehouseOfProduct.Add(new WarehouseOfProduct
+                        {
+                            WarehouseId = Supply.WarehouseId,
+                            Product = Product,
+                            Count = Count
+                        });
+                }
+                else
+                {
+                    Supply.Warehouse.WarehouseOfProduct.Remove(Supply.Warehouse.WarehouseOfProduct.ToList().FirstOrDefault(i => i.Product == Product));
+                }
+            }
+        }
+
+        public decimal Weight
         {
             get
             {
-                if (AppData.Context.Product.Where(i => i.CertificateNumber == CertificateNumber) == null)
-                    return (Brush)Application.Current.Resources["PColor_Second"];
+                decimal multiplier;
+                switch (Product.MeasureUnit)
+                {
+                    case "мг.":
+                        multiplier = 0.000000001M;
+                        break;
+                    case "г.":
+                        multiplier = 0.000001M;
+                        break;
+                    case "кг.":
+                        multiplier = 0.001M;
+                        break;
+                    case "т.":
+                        multiplier = 1M;
+                        break;
+                    default:
+                        return 0;
+                }
+                return Product.Weight * multiplier * Count;
+            }
+        }
 
-                return Brushes.Black;
+
+        public string WeightCount
+        {
+            get
+            {
+
+                return $"{Count} шт. ({Weight:N3} т.)";
             }
         }
     }

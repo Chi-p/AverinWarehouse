@@ -27,7 +27,7 @@
         <Grid Grid.Column="4" Grid.RowSpan="3" Background="{StaticResource PColor_Second}"/>
         <Grid Grid.ColumnSpan="5" Grid.Row="2" Background="{StaticResource PColor_Second}"/>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="10">
+        <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="10" Name="SPFunctional">
             <TextBlock Text="Номер" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
             <TextBox Padding="0 5.5" Name="TbxNumber" Width="150" HorizontalAlignment="Left" MaxLength="11" TextChanged="TbxNumber_TextChanged" PreviewTextInput="TbxNumber_PreviewTextInput"/>
             <TextBlock Style="{StaticResource TbkBody}" Text="Дата начала" Margin="5 5 5 0"/>

@@ -28,6 +28,36 @@ namespace AverinApp.Pages.OperatorPages
             InitializeComponent();
             _supply = supply;
             DataContext = _supply;
+            Load();
+        }
+
+        private void Load()
+        {
+            ICProducts.ItemsSource = _supply.SupplyOfProduct.ToList();
+        }
+
+        private void UpdateIC()
+        {
+            ICProducts.ItemsSource = null;
+            ICProducts.ItemsSource = _supply.SupplyOfProduct.ToList();
+            UpdateContext();
+        }
+
+        private void UpdateContext()
+        {
+            DataContext = null;
+            DataContext = _supply;
+        }
+
+        private void ChkBxAccept_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateContext();
+        }
+
+        private void ChkBxAcceptAll_Checked(object sender, RoutedEventArgs e)
+        {
+            _supply.SupplyOfProduct.ToList().ForEach(i => i.Checked = ChkBxAcceptAll.IsChecked.Value);
+            UpdateIC();
         }
     }
 }

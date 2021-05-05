@@ -75,7 +75,7 @@
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Style="{StaticResource TbkBody}" VerticalAlignment="Top" TextAlignment="Right" Width="95" Text="Сертификат:" FontWeight="Bold"/>
-                                                <TextBlock Style="{StaticResource TbkBody}" Text="{Binding CertifacateState}" Foreground="{Binding CertifacateStateColor}" Width="160" TextWrapping="Wrap"/>
+                                                <TextBlock Style="{StaticResource TbkBody}" Text="{Binding CertificateState}" Width="160" TextWrapping="Wrap"/>
                                             </StackPanel>
                                         </StackPanel>
                                     </Border>

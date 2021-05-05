@@ -28,14 +28,6 @@
       <End Role="Certificate" EntitySet="Certificate" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>
-    <AssociationSet Name="FK_ShipmentOfProduct_Certificate" Association="AverinWarehouseDbModel.FK_ShipmentOfProduct_Certificate">
-      <End Role="Certificate" EntitySet="Certificate" />
-      <End Role="ShipmentOfProduct" EntitySet="ShipmentOfProduct" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SupplyOfProduct_Certificate" Association="AverinWarehouseDbModel.FK_SupplyOfProduct_Certificate">
-      <End Role="Certificate" EntitySet="Certificate" />
-      <End Role="SupplyOfProduct" EntitySet="SupplyOfProduct" />
-    </AssociationSet>
     <AssociationSet Name="FK_Shipment_Client" Association="AverinWarehouseDbModel.FK_Shipment_Client">
       <End Role="Client" EntitySet="Client" />
       <End Role="Shipment" EntitySet="Shipment" />
@@ -133,8 +125,6 @@
     <Property Name="Requirements" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Manufacturer" Relationship="AverinWarehouseDbModel.FK_Certificate_Manufacturer" FromRole="Certificate" ToRole="Manufacturer" />
     <NavigationProperty Name="Product" Relationship="AverinWarehouseDbModel.FK_Product_Certificate" FromRole="Certificate" ToRole="Product" />
-    <NavigationProperty Name="ShipmentOfProduct" Relationship="AverinWarehouseDbModel.FK_ShipmentOfProduct_Certificate" FromRole="Certificate" ToRole="ShipmentOfProduct" />
-    <NavigationProperty Name="SupplyOfProduct" Relationship="AverinWarehouseDbModel.FK_SupplyOfProduct_Certificate" FromRole="Certificate" ToRole="SupplyOfProduct" />
   </EntityType>
   <EntityType Name="Client">
     <Key>
@@ -252,8 +242,6 @@
     <Property Name="ShipmentId" Type="Int32" Nullable="false" />
     <Property Name="ProductNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Count" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="CertificateNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Certificate" Relationship="AverinWarehouseDbModel.FK_ShipmentOfProduct_Certificate" FromRole="ShipmentOfProduct" ToRole="Certificate" />
     <NavigationProperty Name="Shipment" Relationship="AverinWarehouseDbModel.FK_ShipmentOfProduct_Shipment" FromRole="ShipmentOfProduct" ToRole="Shipment" />
   </EntityType>
   <EntityType Name="Status">
@@ -299,8 +287,6 @@
     <Property Name="SupplyId" Type="Int32" Nullable="false" />
     <Property Name="ProductNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Count" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="CertificateNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Certificate" Relationship="AverinWarehouseDbModel.FK_SupplyOfProduct_Certificate" FromRole="SupplyOfProduct" ToRole="Certificate" />
     <NavigationProperty Name="Product" Relationship="AverinWarehouseDbModel.FK_SupplyOfProduct_Product" FromRole="SupplyOfProduct" ToRole="Product" />
     <NavigationProperty Name="Supply" Relationship="AverinWarehouseDbModel.FK_SupplyOfProduct_Supply" FromRole="SupplyOfProduct" ToRole="Supply" />
   </EntityType>
@@ -370,30 +356,6 @@
         <PropertyRef Name="Number" />
       </Principal>
       <Dependent Role="Product">
-        <PropertyRef Name="CertificateNumber" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ShipmentOfProduct_Certificate">
-    <End Type="AverinWarehouseDbModel.Certificate" Role="Certificate" Multiplicity="1" />
-    <End Type="AverinWarehouseDbModel.ShipmentOfProduct" Role="ShipmentOfProduct" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Certificate">
-        <PropertyRef Name="Number" />
-      </Principal>
-      <Dependent Role="ShipmentOfProduct">
-        <PropertyRef Name="CertificateNumber" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SupplyOfProduct_Certificate">
-    <End Type="AverinWarehouseDbModel.Certificate" Role="Certificate" Multiplicity="1" />
-    <End Type="AverinWarehouseDbModel.SupplyOfProduct" Role="SupplyOfProduct" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Certificate">
-        <PropertyRef Name="Number" />
-      </Principal>
-      <Dependent Role="SupplyOfProduct">
         <PropertyRef Name="CertificateNumber" />
       </Dependent>
     </ReferentialConstraint>

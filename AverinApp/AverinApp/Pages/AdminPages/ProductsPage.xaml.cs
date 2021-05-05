@@ -56,7 +56,11 @@ namespace AverinApp.Pages.AdminPages
 
         private void BtnCertificate_Click(object sender, RoutedEventArgs e)
         {
-
+            AddCertificateWindow window = new AddCertificateWindow((sender as Button).DataContext as Product, "check")
+            {
+                Owner = Window.GetWindow(this)
+            };
+            window.ShowDialog();
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
@@ -93,7 +97,7 @@ namespace AverinApp.Pages.AdminPages
                     Update();
                 }
             }
-            catch 
+            catch
             {
                 AppData.Message.Error("Невозможно удалить продукт, т.к. он фигурирует в других записях.");
             }

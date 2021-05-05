@@ -109,7 +109,6 @@
     <EntitySetMapping Name="ShipmentOfProduct">
       <EntityTypeMapping TypeName="AverinWarehouseDbModel.ShipmentOfProduct">
         <MappingFragment StoreEntitySet="ShipmentOfProduct">
-          <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
           <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
           <ScalarProperty Name="ShipmentId" ColumnName="ShipmentId" />
@@ -149,7 +148,6 @@
     <EntitySetMapping Name="SupplyOfProduct">
       <EntityTypeMapping TypeName="AverinWarehouseDbModel.SupplyOfProduct">
         <MappingFragment StoreEntitySet="SupplyOfProduct">
-          <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
           <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
           <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />

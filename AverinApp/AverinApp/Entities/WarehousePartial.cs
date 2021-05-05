@@ -22,5 +22,13 @@ namespace AverinApp.Entities
                 return "Не назначен";
             }
         }
+
+        public decimal Busy
+        {
+            get
+            {
+                return WarehouseOfProduct.ToList().Sum(i=>i.Weight);
+            }
+        }
     }
 }

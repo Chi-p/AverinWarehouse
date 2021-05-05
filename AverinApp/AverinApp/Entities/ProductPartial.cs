@@ -47,5 +47,6 @@ namespace AverinApp.Entities
                 return $"{Description}, вес - {WeightUnit}, цена - {Price} рублей(руб.)";
             }
         }
+
     }
 }

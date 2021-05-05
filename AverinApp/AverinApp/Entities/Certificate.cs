@@ -18,8 +18,6 @@ namespace AverinApp.Entities
         public Certificate()
         {
             this.Product = new HashSet<Product>();
-            this.ShipmentOfProduct = new HashSet<ShipmentOfProduct>();
-            this.SupplyOfProduct = new HashSet<SupplyOfProduct>();
         }
     
         public string Number { get; set; }
@@ -32,9 +30,5 @@ namespace AverinApp.Entities
         public virtual Manufacturer Manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShipmentOfProduct> ShipmentOfProduct { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SupplyOfProduct> SupplyOfProduct { get; set; }
     }
 }

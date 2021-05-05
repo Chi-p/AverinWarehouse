@@ -36,8 +36,8 @@
                 <DataGridTemplateColumn Header="Сертификат">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="BtnCertificate" Click="BtnCertificate_Click" Content="{Binding CertificateState}" BorderBrush="{Binding CertifacateStateColor}" 
-                                    Foreground="{Binding CertifacateStateColor}" Padding="10 3" Width="auto" Background="White" BorderThickness="1" ToolTip="Просмотреть"/>
+                            <Button Name="BtnCertificate" Click="BtnCertificate_Click" Content="{Binding CertificateState}" BorderBrush="{StaticResource PColor_Second}" 
+                                    Foreground="{StaticResource PColor_Black}" Padding="10 3" Width="auto" Background="White" BorderThickness="1" ToolTip="Просмотреть"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

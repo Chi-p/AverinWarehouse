@@ -18,9 +18,7 @@ namespace AverinApp.Entities
         public int SupplyId { get; set; }
         public string ProductNumber { get; set; }
         public decimal Count { get; set; }
-        public string CertificateNumber { get; set; }
     
-        public virtual Certificate Certificate { get; set; }
         public virtual Product Product { get; set; }
         public virtual Supply Supply { get; set; }
     }

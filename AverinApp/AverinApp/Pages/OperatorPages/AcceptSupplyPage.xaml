@@ -14,21 +14,69 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock HorizontalAlignment="Left" Style="{StaticResource TbkBody}" Text="{Binding SupplyInfo}" VerticalAlignment="Top" FontSize="22" Margin="15 15 0 40"/>
+        <TextBlock HorizontalAlignment="Center" Style="{StaticResource TbkBody}" Text="{Binding SupplyInfo}" VerticalAlignment="Top" FontSize="22" Margin="15 15 15 20"/>
 
-        <Grid Grid.Row="1" Margin="10">
+        <Grid Grid.Row="1" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBlock Style="{StaticResource TbkBody}" Text="Общий вес поставляемого товара:" FontWeight="Bold"/>
-                    <TextBlock Style="{StaticResource TbkBody}" Text="80 т."/>
-                </StackPanel>
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Style="{StaticResource TbkBody}" Text="Состояние склада:" FontWeight="Bold"/>
-                <TextBlock Style="{StaticResource TbkBody}" Text="345/1000 т."/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Style="{StaticResource TbkBody}" Text="Общий вес поставляемого товара:" FontWeight="Bold"/>
+                <TextBlock Style="{StaticResource TbkBody}" Text="{Binding TotalWeight, StringFormat={}{0:N3} т.}"/>
             </StackPanel>
+            <CheckBox HorizontalAlignment="Right" Content="Принять все" Name="ChkBxAcceptAll" Checked="ChkBxAcceptAll_Checked" Unchecked="ChkBxAcceptAll_Checked"/>
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{StaticResource TbkBody}" Text="Состояние склада:" FontWeight="Bold"/>
+                <TextBlock Style="{StaticResource TbkBody}" Name="Tbx" Text="{Binding Warehouse.Busy,StringFormat= {}{0:N3}}" Margin="5 5 0 5"/>
+                <TextBlock Style="{StaticResource TbkBody}" Text="{Binding Warehouse.Capacity, StringFormat='/ {0:N3} т.'}"/>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" Grid.Column="0" Margin="5">
+                <ItemsControl Name="ICProducts">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="430" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="6"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource TbkBody}" Width="115" Text="Наименование:" VerticalAlignment="Top" FontWeight="Bold"/>
+                                        <TextBlock Style="{StaticResource TbkBody}" TextWrapping="Wrap" Width="180" Text="{Binding Product.Name}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource TbkBody}" Width="115" Text="Количество:" VerticalAlignment="Top" FontWeight="Bold"/>
+                                        <TextBlock Style="{StaticResource TbkBody}" TextWrapping="Wrap" Width="180" Text="{Binding WeightCount}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource TbkBody}" Width="115" Text="Сертификат:" VerticalAlignment="Top" FontWeight="Bold"/>
+                                        <TextBlock Style="{StaticResource TbkBody}" TextWrapping="Wrap" Width="180" 
+                                               Foreground="{Binding CertificateStateColor}" Text="{Binding CertificateState}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <CheckBox Grid.Column="1" Content="Принять" IsChecked="{Binding Checked}" Name="ChkBxAccept" 
+                                          Checked="ChkBxAccept_Checked" Unchecked="ChkBxAccept_Checked"/>
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="{StaticResource PColor_Second}" Margin="0 5 0 0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Page>

@@ -26,11 +26,13 @@ namespace AverinApp.Windows.AdditionalWindows
     {
         private static Product _product;
         public static Manufacturer _manufacturer;
+        private readonly string _status;
 
-        public AddCertificateWindow(Product product)
+        public AddCertificateWindow(Product product, string status)
         {
             InitializeComponent();
             _product = product;
+            _status = status;
             Load();
         }
 
@@ -56,6 +58,8 @@ namespace AverinApp.Windows.AdditionalWindows
 
             TbkProductNumber.Text = _product.Number;
             TbkProduct.Text = _product.Info;
+            if (_status == "check")
+                SPFunctional.IsEnabled = false;
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

@@ -220,6 +220,7 @@
     <Compile Include="Entities\WarehouseOfProduct.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\WarehouseOfProductPartial.cs" />
     <Compile Include="Entities\WarehousePartial.cs" />
     <Compile Include="Pages\AdminPages\AdminMenuPage.xaml.cs">
       <DependentUpon>AdminMenuPage.xaml</DependentUpon>

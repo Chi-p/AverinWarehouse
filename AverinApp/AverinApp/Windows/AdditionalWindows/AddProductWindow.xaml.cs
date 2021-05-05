@@ -21,7 +21,7 @@ namespace AverinApp.Windows.AdditionalWindows
     public partial class AddProductWindow : Window
     {
         private Product _product;
-        private string _status;
+        private readonly string _status;
         public static Certificate _certificate;
 
         public AddProductWindow(Product product, string status)
@@ -114,7 +114,7 @@ namespace AverinApp.Windows.AdditionalWindows
         private void TextBlock_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Save("check");
-            AddCertificateWindow window = new AddCertificateWindow(_product)
+            AddCertificateWindow window = new AddCertificateWindow(_product, "edit")
             {
                 Owner = Window.GetWindow(this)
             };
@@ -200,7 +200,7 @@ namespace AverinApp.Windows.AdditionalWindows
         {
             if (Save("check"))
             {
-                AddCertificateWindow window = new AddCertificateWindow(_product)
+                AddCertificateWindow window = new AddCertificateWindow(_product, "edit")
                 {
                     Owner = Window.GetWindow(this)
                 };
