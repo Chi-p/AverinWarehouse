@@ -55,7 +55,7 @@ namespace AverinApp.Pages.OperatorPages
             TbkOfBtnSupply.Text = $"Отгрузка товаров\n на {AppData.CurrentUser.Operator.Warehouse.First().Name.ToLower()}";
             TbkOfBtnShipment.Text = $"Погрузка товаров\n со {AppData.CurrentUser.Operator.Warehouse.First().Name.ToLower()}";
 
-            foreach (var item in AppData.Context.Supply.ToList().Where(i => i.Status.Name == "В пути"))
+            foreach (var item in AppData.Context.Supply.ToList().Where(i => i.Status.Name == "В пути" && i.Warehouse == AppData.CurrentUser.Operator.Warehouse.First()))
             {
                 if (item.SupplyContract.Date < DateTime.Now)
                 {
@@ -64,8 +64,8 @@ namespace AverinApp.Pages.OperatorPages
                 }
             }
 
-            int supply = AppData.Context.Supply.ToList().Count(i => i.Status.Name == "Ожидает отгрузки");
-            int shipment = AppData.Context.Shipment.ToList().Count(i => i.Status.Name == "Ожидает погрузки");
+            int supply = AppData.Context.Supply.ToList().Count(i => i.Status.Name == "Ожидает отгрузки" && i.Warehouse == AppData.CurrentUser.Operator.Warehouse.First());
+            int shipment = AppData.Context.Shipment.ToList().Count(i => i.Status.Name == "Ожидает погрузки" && i.Warehouse == AppData.CurrentUser.Operator.Warehouse.First());
             if (supply != 0)
             {
                 BdrSupplyCount.Visibility = Visibility.Visible;

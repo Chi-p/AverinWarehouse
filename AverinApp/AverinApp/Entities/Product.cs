@@ -18,6 +18,7 @@ namespace AverinApp.Entities
         public Product()
         {
             this.SupplyOfProduct = new HashSet<SupplyOfProduct>();
+            this.WarehouseOfProduct = new HashSet<WarehouseOfProduct>();
         }
     
         public string Number { get; set; }
@@ -31,5 +32,7 @@ namespace AverinApp.Entities
         public virtual Certificate Certificate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplyOfProduct> SupplyOfProduct { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WarehouseOfProduct> WarehouseOfProduct { get; set; }
     }
 }

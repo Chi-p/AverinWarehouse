@@ -73,7 +73,7 @@ namespace AverinApp.Pages.AdminPages
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            AddProductWindow window = new AddProductWindow(null)
+            AddProductWindow window = new AddProductWindow(null, "new")
             {
                 Owner = Window.GetWindow(this)
             };
@@ -101,7 +101,7 @@ namespace AverinApp.Pages.AdminPages
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            AddProductWindow window = new AddProductWindow((sender as Button).DataContext as Product)
+            AddProductWindow window = new AddProductWindow((sender as Button).DataContext as Product, "edit")
             {
                 Owner = Window.GetWindow(this)
             };

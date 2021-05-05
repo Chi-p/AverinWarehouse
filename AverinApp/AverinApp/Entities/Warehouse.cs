@@ -19,6 +19,7 @@ namespace AverinApp.Entities
         {
             this.Shipment = new HashSet<Shipment>();
             this.Supply = new HashSet<Supply>();
+            this.WarehouseOfProduct = new HashSet<WarehouseOfProduct>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,7 @@ namespace AverinApp.Entities
         public virtual ICollection<Shipment> Shipment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply> Supply { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WarehouseOfProduct> WarehouseOfProduct { get; set; }
     }
 }

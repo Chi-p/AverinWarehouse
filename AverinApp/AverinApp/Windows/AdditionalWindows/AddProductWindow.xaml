@@ -24,7 +24,7 @@
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="Название" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
-                    <TextBox Width="auto" Padding="0 5.5" Name="TbxName"/>
+                    <TextBox Width="auto" Padding="0 5.5" Name="TbxName" MaxLength="50"/>
                 </StackPanel>
             </Grid>
             <TextBlock Text="Описание" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
@@ -37,15 +37,15 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="Вес" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
-                    <TextBox Width="auto" Padding="0 5.5" Name="TbxWeight" PreviewTextInput="Tbx_PreviewTextInput"/>
+                    <TextBox Width="auto" Padding="0 5.5" Name="TbxWeight" PreviewTextInput="Tbx_PreviewTextInput" MaxLength="10"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="Единица измерения" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
-                    <TextBox Width="auto" Padding="0 5.5" Name="TbxUnit"/>
+                    <TextBox Width="auto" Padding="0 5.5" Name="TbxUnit" MaxLength="20"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2">
                     <TextBlock Text="Цена" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
-                    <TextBox Width="auto" Padding="0 5.5" Name="TbxPrice" PreviewTextInput="Tbx_PreviewTextInput"/>
+                    <TextBox Width="auto" Padding="0 5.5" Name="TbxPrice" PreviewTextInput="Tbx_PreviewTextInput" MaxLength="10"/>
                 </StackPanel>
             </Grid>
             <Grid>

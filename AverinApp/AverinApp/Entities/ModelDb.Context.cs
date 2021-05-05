@@ -43,5 +43,6 @@ namespace AverinApp.Entities
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Warehouse> Warehouse { get; set; }
+        public virtual DbSet<WarehouseOfProduct> WarehouseOfProduct { get; set; }
     }
 }

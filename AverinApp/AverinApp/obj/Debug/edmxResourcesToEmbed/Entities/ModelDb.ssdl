@@ -9,6 +9,7 @@
     <Property Name="DateEnd" Type="datetime" Nullable="false" />
     <Property Name="Photo" Type="varbinary(max)" />
     <Property Name="ManufacturerId" Type="int" Nullable="false" />
+    <Property Name="Requirements" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Client">
     <Key>
@@ -31,7 +32,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="CountryCode" Type="nvarchar" MaxLength="3" Nullable="false" />
@@ -50,7 +51,7 @@
       <PropertyRef Name="Number" />
     </Key>
     <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="MeasureUnit" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="Weight" Type="decimal" Precision="10" Scale="2" Nullable="false" />
@@ -168,6 +169,15 @@
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Capacity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="OperatorId" Type="int" />
+  </EntityType>
+  <EntityType Name="WarehouseOfProduct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WarehouseId" Type="int" Nullable="false" />
+    <Property Name="ProductNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Count" Type="decimal" Precision="10" Scale="2" Nullable="false" />
   </EntityType>
   <Association Name="FK_Certificate_Manufacturer">
     <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
@@ -445,6 +455,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_WarehouseOfProduct_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="WarehouseOfProduct" Type="Self.WarehouseOfProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Number" />
+      </Principal>
+      <Dependent Role="WarehouseOfProduct">
+        <PropertyRef Name="ProductNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WarehouseOfProduct_Warehouse">
+    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+    <End Role="WarehouseOfProduct" Type="Self.WarehouseOfProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Warehouse">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WarehouseOfProduct">
+        <PropertyRef Name="WarehouseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="AverinWarehouseDbModelStoreContainer">
     <EntitySet Name="Certificate" EntityType="Self.Certificate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
@@ -464,6 +498,7 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WarehouseOfProduct" EntityType="Self.WarehouseOfProduct" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Certificate_Manufacturer" Association="Self.FK_Certificate_Manufacturer">
       <End Role="Manufacturer" EntitySet="Manufacturer" />
       <End Role="Certificate" EntitySet="Certificate" />
@@ -555,6 +590,14 @@
     <AssociationSet Name="FK_Warehouse_Operator" Association="Self.FK_Warehouse_Operator">
       <End Role="Operator" EntitySet="Operator" />
       <End Role="Warehouse" EntitySet="Warehouse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WarehouseOfProduct_Product" Association="Self.FK_WarehouseOfProduct_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="WarehouseOfProduct" EntitySet="WarehouseOfProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WarehouseOfProduct_Warehouse" Association="Self.FK_WarehouseOfProduct_Warehouse">
+      <End Role="Warehouse" EntitySet="Warehouse" />
+      <End Role="WarehouseOfProduct" EntitySet="WarehouseOfProduct" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

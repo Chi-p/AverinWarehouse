@@ -68,3 +68,10 @@ F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\Addit
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddProductWindow.baml
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddCertificateWindow.g.cs
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddCertificateWindow.baml
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddManufacturerWindow.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Windows\AdditionalWindows\AddManufacturerWindow.baml
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Controls\SupplyControl.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Controls\SupplyControl.baml
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\OperatorPages\AcceptSupplyPage.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\OperatorPages\AcceptSupplyPage.baml

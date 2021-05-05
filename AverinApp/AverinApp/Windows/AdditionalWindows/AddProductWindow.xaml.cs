@@ -21,11 +21,14 @@ namespace AverinApp.Windows.AdditionalWindows
     public partial class AddProductWindow : Window
     {
         private Product _product;
+        private string _status;
+        public static Certificate _certificate;
 
-        public AddProductWindow(Product product)
+        public AddProductWindow(Product product, string status)
         {
             InitializeComponent();
             _product = product;
+            _status = status;
             Load();
         }
 
@@ -88,7 +91,10 @@ namespace AverinApp.Windows.AdditionalWindows
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_status == "new")
+                Save("new");
+            else
+                Save("edit");
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -107,20 +113,101 @@ namespace AverinApp.Windows.AdditionalWindows
 
         private void TextBlock_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            AddCertificateWindow window = new AddCertificateWindow(_product.Certificate)
+            Save("check");
+            AddCertificateWindow window = new AddCertificateWindow(_product)
             {
                 Owner = Window.GetWindow(this)
             };
             window.ShowDialog();
+            if (_certificate != null)
+                TbxCertificate.Text = _certificate.Info;
+        }
+
+
+        private bool Save(string status)
+        {
+            if (string.IsNullOrWhiteSpace(TbxName.Text) || string.IsNullOrWhiteSpace(TbxDescription.Text) || string.IsNullOrWhiteSpace(TbxWeight.Text)
+                || string.IsNullOrWhiteSpace(TbxUnit.Text) || string.IsNullOrWhiteSpace(TbxPrice.Text))
+            {
+                AppData.Message.Error("Сначала заполните все поля.");
+                return false;
+            }
+            else
+            {
+                var products = AppData.Context.Product.ToList();
+                if (_product == null)
+                {
+                    if (products.FirstOrDefault(i => i.Name == TbxName.Text) != null)
+                    {
+                        AppData.Message.Error("Продукт с указанным названием уже существует.");
+                        return false;
+                    }
+                    _product = new Product
+                    {
+                        Number = TbxNumber.Text,
+                        Name = TbxName.Text,
+                        Description = TbxDescription.Text,
+                        Weight = Convert.ToDecimal(TbxWeight.Text),
+                        MeasureUnit = TbxUnit.Text,
+                        Price = Convert.ToDecimal(TbxPrice.Text),
+                    };
+                }
+                else
+                {
+                    if (products.FirstOrDefault(i => i.Name == TbxName.Text && i.Name != _product.Name) != null)
+                    {
+                        AppData.Message.Error("Продукт с указанным названием уже существует.");
+                        return false;
+                    }
+                }
+
+                if (status == "new")
+                {
+                    if (_certificate == null)
+                    {
+                        AppData.Message.Error("Добавьте сертификат.");
+                        return false;
+                    }
+                    _product.Name = TbxName.Text;
+                    _product.Description = TbxDescription.Text;
+                    _product.Weight = Convert.ToDecimal(TbxWeight.Text);
+                    _product.MeasureUnit = TbxUnit.Text;
+                    _product.Price = Convert.ToDecimal(TbxPrice.Text);
+                    _product.Certificate = _certificate;
+                    AppData.Context.Product.Add(_product);
+                    AppData.Context.SaveChanges();
+                    AppData.Message.Info("Продукт успешно сохранён!");
+                    Close();
+                }
+
+                if (status == "edit")
+                {
+                    _product.Name = TbxName.Text;
+                    _product.Description = TbxDescription.Text;
+                    _product.Weight = Convert.ToDecimal(TbxWeight.Text);
+                    _product.MeasureUnit = TbxUnit.Text;
+                    _product.Price = Convert.ToDecimal(TbxPrice.Text);
+                    _product.Certificate = _certificate;
+                    AppData.Context.SaveChanges();
+                    AppData.Message.Info("Продукт успешно сохранён!");
+                    Close();
+                }
+                return true;
+            }
         }
 
         private void BtnAddCertificate_Click(object sender, RoutedEventArgs e)
         {
-            AddCertificateWindow window = new AddCertificateWindow(null)
+            if (Save("check"))
             {
-                Owner = Window.GetWindow(this)
-            };
-            window.ShowDialog();
+                AddCertificateWindow window = new AddCertificateWindow(_product)
+                {
+                    Owner = Window.GetWindow(this)
+                };
+                window.ShowDialog();
+            }
+            if (_certificate != null)
+                TbxCertificate.Text = _certificate.Info;
         }
     }
 }

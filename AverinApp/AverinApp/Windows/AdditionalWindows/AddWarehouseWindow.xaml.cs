@@ -116,7 +116,7 @@ namespace AverinApp.Windows.AdditionalWindows
                         AppData.Message.Error("Оператор уже работает на другом складе");
                         return;
                     }
-                    if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Address == TbxAdress.Text && i.Address != _warehouse.Address) != null)
+                    if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Name == TbxName.Text && i.Name != _warehouse.Name) != null)
                     {
                         AppData.Message.Error("Склад с таким адресом уже сущуствует");
                         return;

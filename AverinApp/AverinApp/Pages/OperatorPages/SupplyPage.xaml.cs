@@ -53,7 +53,7 @@ namespace AverinApp.Pages.OperatorPages
                 }
             }
 
-            int waited = _supplies.Count(i => i.Status.Name == "Ожидает");
+            int waited = _supplies.Count(i => i.Status.Name == "Ожидает отгрузки");
             int completed = _supplies.Count(i => i.Status.Name == "Отгружен");
             int transist = _supplies.Count(i => i.Status.Name == "В пути");
             int canceled = _supplies.Count(i => i.Status.Name == "Отменён");
@@ -63,13 +63,31 @@ namespace AverinApp.Pages.OperatorPages
             TbkTransist.Text = $"В пути ({transist})";
             TbkCanceled.Text = $"Отменённые ({canceled})";
 
-            ICTransist.ItemsSource = null;
+            ICTransist.ItemsSource = ICWaited.ItemsSource = ICCanceled.ItemsSource = ICCompleted.ItemsSource = null;
+            ICWaited.ItemsSource = _supplies.Where(i => i.Status.Name == "Ожидает отгрузки");
+            ICCompleted.ItemsSource = _supplies.Where(i => i.Status.Name == "Отгружен");
             ICTransist.ItemsSource = _supplies.Where(i => i.Status.Name == "В пути");
+            ICCanceled.ItemsSource = _supplies.Where(i => i.Status.Name == "Отменён");
         }
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
             Update();
+        }
+
+        private void BtnAccept_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AcceptSupplyPage((sender as Button).DataContext as Supply));
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (AppData.Message.Question("Вы уверены что хотите отменить отгрузку?") == MessageBoxResult.Yes)
+            {
+                ((sender as Button).DataContext as Supply).StatusId = 5;
+                AppData.Context.SaveChanges();
+                Update();
+            }
         }
     }
 }

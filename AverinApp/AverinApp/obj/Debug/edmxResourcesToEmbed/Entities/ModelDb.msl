@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Certificate">
       <EntityTypeMapping TypeName="AverinWarehouseDbModel.Certificate">
         <MappingFragment StoreEntitySet="Certificate">
+          <ScalarProperty Name="Requirements" ColumnName="Requirements" />
           <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
@@ -184,6 +185,16 @@
           <ScalarProperty Name="Capacity" ColumnName="Capacity" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WarehouseOfProduct">
+      <EntityTypeMapping TypeName="AverinWarehouseDbModel.WarehouseOfProduct">
+        <MappingFragment StoreEntitySet="WarehouseOfProduct">
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
+          <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -14,7 +14,7 @@
 
         <StackPanel Margin="10" VerticalAlignment="Center">
             <TextBlock Text="Название" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
-            <TextBox Width="auto" Padding="0 5.5" Name="TbxName"/>
+            <TextBox Width="auto" Padding="0 5.5" Name="TbxName" MaxLength="30"/>
             <TextBlock Text="Адрес" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
             <TextBox Width="auto" Padding="0 5.5" Name="TbxAdress"/>
             <Grid>

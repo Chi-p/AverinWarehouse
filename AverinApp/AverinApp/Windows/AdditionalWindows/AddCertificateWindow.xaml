@@ -29,7 +29,7 @@
 
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="10">
             <TextBlock Text="Номер" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
-            <TextBox Padding="0 5.5" Name="TbxNumber" Width="150" HorizontalAlignment="Left" MaxLength="11" TextChanged="TbxNumber_TextChanged"/>
+            <TextBox Padding="0 5.5" Name="TbxNumber" Width="150" HorizontalAlignment="Left" MaxLength="11" TextChanged="TbxNumber_TextChanged" PreviewTextInput="TbxNumber_PreviewTextInput"/>
             <TextBlock Style="{StaticResource TbkBody}" Text="Дата начала" Margin="5 5 5 0"/>
             <DatePicker Name="DpStartDate" HorizontalAlignment="Left" Width="200" Padding="0 5.5" SelectedDateChanged="DpStartDate_SelectedDateChanged"/>
             <TextBlock Style="{StaticResource TbkBody}" Text="Дата окончания"/>
@@ -38,26 +38,40 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="Производитель" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
-                    <ComboBox Width="auto" DisplayMemberPath="Name" Name="CbxManufacturer" SelectionChanged="CbxManufacturer_SelectionChanged"/>
+                    <ComboBox FontSize="14" Width="auto" DisplayMemberPath="Name" Name="CbxManufacturer" SelectionChanged="CbxManufacturer_SelectionChanged"/>
                 </StackPanel>
-                <Button Grid.Column="1" VerticalAlignment="Bottom" Content="+" Width="32" FontSize="24" Height="32" Name="BtnAddManufacturer" Click="BtnAddManufacturer_Click"/>
+                <Button Grid.Column="1" VerticalAlignment="Bottom" Content="&#xEB7E;" Width="27" FontSize="13" Height="27" FontFamily="Segoe MDL2 Assets"
+                        Name="BtnEditManufacturer" Click="BtnEditManufacturer_Click" Style="{StaticResource BtnEdit}" IsEnabled="False"/>
+                <Button Grid.Column="2" VerticalAlignment="Bottom" Content="+" Width="27" FontSize="20" Height="27" Name="BtnAddManufacturer" Click="BtnAddManufacturer_Click"/>
             </Grid>
+            <TextBlock Text="Требования нормативных документов" Style="{StaticResource TbkBody}" Margin="5 5 5 0"/>
+            <TextBox Padding="0 5.5" FontSize="14" Name="TbxRequirements" Width="auto" Height="100" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" TextChanged="TbxRequirements_TextChanged"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10">
                 <Button Padding="15 4" Width="auto" Content="Сохранить" Name="BtnSave" Click="BtnSave_Click"/>
                 <Button Padding="15 4" Width="auto" Content="Отмена" Name="BtnCancel" Click="BtnCancel_Click" Style="{StaticResource BtnCancel}"/>
             </StackPanel>
         </StackPanel>
 
-        <Canvas Grid.Column="3" Margin="5" Grid.Row="1">
-            <Grid>
-                <TextBlock Name="TbkNumber" FontFamily="Times New Roman" FontSize="18" Margin="452,166,-447,-159"/>
-            </Grid>
-            <Canvas.Background>
-                <ImageBrush ImageSource="/AverinApp;component/Resources/Pictures/certificate.jpg" Stretch="Uniform"/>
-            </Canvas.Background>
-        </Canvas>
+        <Viewbox Grid.Column="3" Margin="5" Grid.Row="1">
+            <Canvas Name="CnsCertificate" Width="550" Height="810">
+                <Grid>
+                    <TextBlock Name="TbkNumber" FontFamily="Times New Roman" FontSize="18" Margin="188,113,0,0"/>
+                    <TextBlock Name="TbkDateStart" FontFamily="Times New Roman" FontSize="16" Margin="288,139,0,0"/>
+                    <TextBlock Name="TbkDateEnd" FontFamily="Times New Roman" FontSize="16" Margin="420,139, 0, 0"/>
+                    <TextBlock Name="TbkProductNumber" FontFamily="Times New Roman" FontSize="14" Margin="420,305,26,0" Width="122" TextAlignment="Center"/>
+                    <TextBlock Name="TbkProduct" FontFamily="Times New Roman" FontSize="12" Margin="-135,63,0,0" Width="405" Height="60" TextWrapping="Wrap"/>
+                    <TextBlock Name="TbkRequirements" FontFamily="Times New Roman" FontSize="12" Margin="-125,263,0,0" Width="415" Height="80" TextWrapping="Wrap"/>
+                    <TextBlock Name="TbkManufacturer" FontFamily="Times New Roman" FontSize="12" Margin="-125,415,0,0" Width="415" Height="40" TextWrapping="Wrap"/>
+                    <TextBlock Name="TbkIssued" FontFamily="Times New Roman" FontSize="12" Margin="-125,515,0,0" Width="415" Height="40" TextWrapping="Wrap"/>
+                </Grid>
+                <Canvas.Background>
+                    <ImageBrush ImageSource="/AverinApp;component/Resources/Pictures/certificate.jpg" Stretch="Uniform"/>
+                </Canvas.Background>
+            </Canvas>
+        </Viewbox>
     </Grid>
 </Window>

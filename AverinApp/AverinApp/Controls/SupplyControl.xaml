@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="AverinApp.Controls.SupplyControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AverinApp.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="270" d:DesignWidth="940">
+    <Grid Margin="10">
+        <StackPanel Orientation="Horizontal">
+
+            <StackPanel Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Width="145" FontSize="18" Text="Номер договора:" FontWeight="Bold"/>
+                    <TextBlock Style="{StaticResource TbkBody}" Text="{Binding SupplyContractNumber}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Width="145" FontSize="18" Text="Дата и время&#10;прибытия:" FontWeight="Bold"/>
+                    <TextBlock Style="{StaticResource TbkBody}" VerticalAlignment="Bottom" Text="{Binding SupplyContract.Date, StringFormat='dd MMMM yyyy г., hh ч. mm мин.'}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TbkBody}" VerticalAlignment="Top" TextAlignment="Right" Width="145" FontSize="18" Text="Поставщик:" FontWeight="Bold"/>
+                    <Expander Margin="5"  Width="320">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource TbkBody}" Margin="5 8 5 2" Width="75" TextAlignment="Right" VerticalAlignment="Top" Text="Название:" FontWeight="Bold"/>
+                                <TextBlock Style="{StaticResource TbkBody}" Margin="5 8 5 2" Width="230" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="{Binding Provider.Name}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource TbkBody}" Margin="5 8 5 2" Width="75" TextAlignment="Right" VerticalAlignment="Top" Text="Страна:" FontWeight="Bold"/>
+                                <TextBlock Style="{StaticResource TbkBody}" Margin="5 8 5 2" Width="230" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="{Binding Provider.Country.Name}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource TbkBody}" Margin="5 2" Width="75" TextAlignment="Right" VerticalAlignment="Top" Text="Адрес:" FontWeight="Bold"/>
+                                <TextBlock Style="{StaticResource TbkBody}" Margin="5 2" VerticalAlignment="Bottom" Width="230" TextWrapping="Wrap" Text="{Binding Provider.Address}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource TbkBody}" Margin="5 2" Width="75" TextAlignment="Right" VerticalAlignment="Top" Text="Телефон:" FontWeight="Bold"/>
+                                <TextBlock Style="{StaticResource TbkBody}" Margin="5 2" Width="230" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="{Binding Provider.Phone}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Width="145" FontSize="18" Text="Стоимость:" FontWeight="Bold"/>
+                    <TextBlock Style="{StaticResource TbkBody}" VerticalAlignment="Bottom" Text="{Binding SupplyContract.Price, StringFormat={}{0} ₽}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock VerticalAlignment="Top" Style="{StaticResource TbkBody}" TextAlignment="Right" FontSize="18" Text="Доставляемые&#10;товары:" FontWeight="Bold"/>
+
+                <Expander Margin="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="300">
+                    <Expander.Header>
+                        <TextBlock Text="{Binding ProductCount}" Style="{StaticResource TbkBody}"></TextBlock>
+                    </Expander.Header>
+                    <ScrollViewer VerticalScrollBarVisibility="Visible" Height="200">
+                        <ItemsControl ItemsSource="{Binding SupplyOfProduct}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource PColor_Second}" Margin="5">
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource TbkBody}" VerticalAlignment="Top" TextAlignment="Right" Width="95" Text="Название:" FontWeight="Bold"/>
+                                                <TextBlock Style="{StaticResource TbkBody}" Text="{Binding Product.Name}" Width="160" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Width="95" Text="Номер:" FontWeight="Bold"/>
+                                                <TextBlock Style="{StaticResource TbkBody}" Text="{Binding ProductNumber}" Width="160"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource TbkBody}" VerticalAlignment="Top" TextAlignment="Right" Width="95" Text="Сертификат:" FontWeight="Bold"/>
+                                                <TextBlock Style="{StaticResource TbkBody}" Text="{Binding CertifacateState}" Foreground="{Binding CertifacateStateColor}" Width="160" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Expander>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

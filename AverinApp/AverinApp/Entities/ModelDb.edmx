@@ -14,6 +14,7 @@
           <Property Name="DateEnd" Type="datetime" Nullable="false" />
           <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="ManufacturerId" Type="int" Nullable="false" />
+          <Property Name="Requirements" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -36,7 +37,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CountryCode" Type="nvarchar" MaxLength="3" Nullable="false" />
@@ -55,7 +56,7 @@
             <PropertyRef Name="Number" />
           </Key>
           <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="MeasureUnit" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Weight" Type="decimal" Precision="10" Scale="2" Nullable="false" />
@@ -173,6 +174,15 @@
           <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Capacity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="OperatorId" Type="int" />
+        </EntityType>
+        <EntityType Name="WarehouseOfProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WarehouseId" Type="int" Nullable="false" />
+          <Property Name="ProductNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Count" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <Association Name="FK_Certificate_Manufacturer">
           <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
@@ -450,6 +460,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WarehouseOfProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="WarehouseOfProduct" Type="Self.WarehouseOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="WarehouseOfProduct">
+              <PropertyRef Name="ProductNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarehouseOfProduct_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="WarehouseOfProduct" Type="Self.WarehouseOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarehouseOfProduct">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AverinWarehouseDbModelStoreContainer">
           <EntitySet Name="Certificate" EntityType="Self.Certificate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
@@ -469,6 +503,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarehouseOfProduct" EntityType="Self.WarehouseOfProduct" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Certificate_Manufacturer" Association="Self.FK_Certificate_Manufacturer">
             <End Role="Manufacturer" EntitySet="Manufacturer" />
             <End Role="Certificate" EntitySet="Certificate" />
@@ -561,6 +596,14 @@
             <End Role="Operator" EntitySet="Operator" />
             <End Role="Warehouse" EntitySet="Warehouse" />
           </AssociationSet>
+          <AssociationSet Name="FK_WarehouseOfProduct_Product" Association="Self.FK_WarehouseOfProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="WarehouseOfProduct" EntitySet="WarehouseOfProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseOfProduct_Warehouse" Association="Self.FK_WarehouseOfProduct_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="WarehouseOfProduct" EntitySet="WarehouseOfProduct" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -585,6 +628,7 @@
           <EntitySet Name="sysdiagrams" EntityType="AverinWarehouseDbModel.sysdiagrams" />
           <EntitySet Name="User" EntityType="AverinWarehouseDbModel.User" />
           <EntitySet Name="Warehouse" EntityType="AverinWarehouseDbModel.Warehouse" />
+          <EntitySet Name="WarehouseOfProduct" EntityType="AverinWarehouseDbModel.WarehouseOfProduct" />
           <AssociationSet Name="FK_Certificate_Manufacturer" Association="AverinWarehouseDbModel.FK_Certificate_Manufacturer">
             <End Role="Manufacturer" EntitySet="Manufacturer" />
             <End Role="Certificate" EntitySet="Certificate" />
@@ -633,6 +677,10 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="SupplyOfProduct" EntitySet="SupplyOfProduct" />
           </AssociationSet>
+          <AssociationSet Name="FK_WarehouseOfProduct_Product" Association="AverinWarehouseDbModel.FK_WarehouseOfProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="WarehouseOfProduct" EntitySet="WarehouseOfProduct" />
+          </AssociationSet>
           <AssociationSet Name="FK_Shipment_Provider" Association="AverinWarehouseDbModel.FK_Shipment_Provider">
             <End Role="Provider" EntitySet="Provider" />
             <End Role="Shipment" EntitySet="Shipment" />
@@ -677,6 +725,10 @@
             <End Role="Supply" EntitySet="Supply" />
             <End Role="SupplyOfProduct" EntitySet="SupplyOfProduct" />
           </AssociationSet>
+          <AssociationSet Name="FK_WarehouseOfProduct_Warehouse" Association="AverinWarehouseDbModel.FK_WarehouseOfProduct_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="WarehouseOfProduct" EntitySet="WarehouseOfProduct" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Certificate">
           <Key>
@@ -687,6 +739,7 @@
           <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ManufacturerId" Type="Int32" Nullable="false" />
+          <Property Name="Requirements" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Manufacturer" Relationship="AverinWarehouseDbModel.FK_Certificate_Manufacturer" FromRole="Certificate" ToRole="Manufacturer" />
           <NavigationProperty Name="Product" Relationship="AverinWarehouseDbModel.FK_Product_Certificate" FromRole="Certificate" ToRole="Product" />
           <NavigationProperty Name="ShipmentOfProduct" Relationship="AverinWarehouseDbModel.FK_ShipmentOfProduct_Certificate" FromRole="Certificate" ToRole="ShipmentOfProduct" />
@@ -716,7 +769,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CountryCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
@@ -741,7 +794,7 @@
             <PropertyRef Name="Number" />
           </Key>
           <Property Name="Number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MeasureUnit" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Weight" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
@@ -749,6 +802,7 @@
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <NavigationProperty Name="Certificate" Relationship="AverinWarehouseDbModel.FK_Product_Certificate" FromRole="Product" ToRole="Certificate" />
           <NavigationProperty Name="SupplyOfProduct" Relationship="AverinWarehouseDbModel.FK_SupplyOfProduct_Product" FromRole="Product" ToRole="SupplyOfProduct" />
+          <NavigationProperty Name="WarehouseOfProduct" Relationship="AverinWarehouseDbModel.FK_WarehouseOfProduct_Product" FromRole="Product" ToRole="WarehouseOfProduct" />
         </EntityType>
         <EntityType Name="Provider">
           <Key>
@@ -892,6 +946,18 @@
           <NavigationProperty Name="Operator" Relationship="AverinWarehouseDbModel.FK_Warehouse_Operator" FromRole="Warehouse" ToRole="Operator" />
           <NavigationProperty Name="Shipment" Relationship="AverinWarehouseDbModel.FK_Shipment_Warehouse" FromRole="Warehouse" ToRole="Shipment" />
           <NavigationProperty Name="Supply" Relationship="AverinWarehouseDbModel.FK_Supply_Warehouse" FromRole="Warehouse" ToRole="Supply" />
+          <NavigationProperty Name="WarehouseOfProduct" Relationship="AverinWarehouseDbModel.FK_WarehouseOfProduct_Warehouse" FromRole="Warehouse" ToRole="WarehouseOfProduct" />
+        </EntityType>
+        <EntityType Name="WarehouseOfProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WarehouseId" Type="Int32" Nullable="false" />
+          <Property Name="ProductNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Product" Relationship="AverinWarehouseDbModel.FK_WarehouseOfProduct_Product" FromRole="WarehouseOfProduct" ToRole="Product" />
+          <NavigationProperty Name="Warehouse" Relationship="AverinWarehouseDbModel.FK_WarehouseOfProduct_Warehouse" FromRole="WarehouseOfProduct" ToRole="Warehouse" />
         </EntityType>
         <Association Name="FK_Certificate_Manufacturer">
           <End Type="AverinWarehouseDbModel.Manufacturer" Role="Manufacturer" Multiplicity="1" />
@@ -1037,6 +1103,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WarehouseOfProduct_Product">
+          <End Type="AverinWarehouseDbModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="AverinWarehouseDbModel.WarehouseOfProduct" Role="WarehouseOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="WarehouseOfProduct">
+              <PropertyRef Name="ProductNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Shipment_Provider">
           <End Type="AverinWarehouseDbModel.Provider" Role="Provider" Multiplicity="1" />
           <End Type="AverinWarehouseDbModel.Shipment" Role="Shipment" Multiplicity="*" />
@@ -1169,6 +1247,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WarehouseOfProduct_Warehouse">
+          <End Type="AverinWarehouseDbModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="AverinWarehouseDbModel.WarehouseOfProduct" Role="WarehouseOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarehouseOfProduct">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1178,6 +1268,7 @@
           <EntitySetMapping Name="Certificate">
             <EntityTypeMapping TypeName="AverinWarehouseDbModel.Certificate">
               <MappingFragment StoreEntitySet="Certificate">
+                <ScalarProperty Name="Requirements" ColumnName="Requirements" />
                 <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
@@ -1358,6 +1449,16 @@
                 <ScalarProperty Name="Capacity" ColumnName="Capacity" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarehouseOfProduct">
+            <EntityTypeMapping TypeName="AverinWarehouseDbModel.WarehouseOfProduct">
+              <MappingFragment StoreEntitySet="WarehouseOfProduct">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -39,5 +39,13 @@ namespace AverinApp.Entities
                     return (Brush)Application.Current.Resources["PColor_First"];
             }
         }
+
+        public string Info
+        {
+            get
+            {
+                return $"{Description}, вес - {WeightUnit}, цена - {Price} рублей(руб.)";
+            }
+        }
     }
 }

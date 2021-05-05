@@ -67,6 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\SupplyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdminPages\AdminMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +91,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\OperatorPages\AcceptSupplyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\OperatorPages\OperatorMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AdditionalWindows\AddCertificateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AdditionalWindows\AddManufacturerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,6 +137,9 @@
     </Compile>
     <Compile Include="Classes\HelperClass.cs" />
     <Compile Include="Classes\MessagesClass.cs" />
+    <Compile Include="Controls\SupplyControl.xaml.cs">
+      <DependentUpon>SupplyControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entities\AppData.cs" />
     <Compile Include="Entities\Certificate.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
@@ -139,6 +154,7 @@
     <Compile Include="Entities\Manufacturer.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ManufacturerPartial.cs" />
     <Compile Include="Entities\ModelDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,6 +217,9 @@
     <Compile Include="Entities\Warehouse.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\WarehouseOfProduct.cs">
+      <DependentUpon>ModelDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\WarehousePartial.cs" />
     <Compile Include="Pages\AdminPages\AdminMenuPage.xaml.cs">
       <DependentUpon>AdminMenuPage.xaml</DependentUpon>
@@ -217,6 +236,9 @@
     <Compile Include="Pages\GeneralPages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\OperatorPages\AcceptSupplyPage.xaml.cs">
+      <DependentUpon>AcceptSupplyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\OperatorPages\OperatorMenuPage.xaml.cs">
       <DependentUpon>OperatorMenuPage.xaml</DependentUpon>
     </Compile>
@@ -228,6 +250,9 @@
     </Compile>
     <Compile Include="Windows\AdditionalWindows\AddCertificateWindow.xaml.cs">
       <DependentUpon>AddCertificateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AdditionalWindows\AddManufacturerWindow.xaml.cs">
+      <DependentUpon>AddManufacturerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\AdditionalWindows\AddOperatorWindow.xaml.cs">
       <DependentUpon>AddOperatorWindow.xaml</DependentUpon>
