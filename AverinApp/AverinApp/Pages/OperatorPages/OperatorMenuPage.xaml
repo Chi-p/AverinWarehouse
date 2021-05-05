@@ -27,16 +27,10 @@
                     <TextBlock Style="{StaticResource TbkBody}" Name="TbkSupplyCount" Text="0" Foreground="White" FontSize="12" TextAlignment="Center"/>
                 </Border>
             </Grid>
-            <Grid>
-                <Button Name="BtnShipment" Click="BtnShipment_Click" FontSize="26" HorizontalContentAlignment="Right" Width="auto" Padding="30 2">
-                    <TextBlock Text="Погрузка товаров&#10;со склада №0" TextAlignment="Center" Name="TbkOfBtnShipment"/>
-                </Button>
-                <Border Name="BdrShipmentCount" Background="{StaticResource PColor_First}" CornerRadius="100" HorizontalAlignment="Right" 
-                        VerticalAlignment="Top" Width="30" Height="30" Visibility="Hidden">
-                    <TextBlock Style="{StaticResource TbkBody}" Name="TbkShipmentCount" Text="0" Foreground="White" FontSize="12" TextAlignment="Center"/>
-                </Border>
-            </Grid>
-            <Button Content="Книга учёта" FontSize="26" Width="auto" Padding="30 2"/>
+            <Button Name="BtnShipment" Click="BtnShipment_Click" FontSize="26" HorizontalContentAlignment="Right" Width="auto" Padding="30 2">
+                <TextBlock Text="Отправка товаров&#10;со склада №0" TextAlignment="Center" Name="TbkOfBtnShipment"/>
+            </Button>
+            <Button Name="BtnReport" Click="BtnReport_Click" Content="Отчёт" FontSize="26" Width="auto" Padding="30 2"/>
         </StackPanel>
 
         <TextBlock Grid.Row="2" VerticalAlignment="Top" Text="Вы не назначены ни на один из складов!" HorizontalAlignment="Center"

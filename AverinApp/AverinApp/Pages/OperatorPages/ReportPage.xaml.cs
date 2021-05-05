@@ -1,5 +1,4 @@
-﻿using AverinApp.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace AverinApp.Pages.OperatorPages
 {
     /// <summary>
-    /// Interaction logic for ShipmentPage.xaml
+    /// Interaction logic for ReportPage.xaml
     /// </summary>
-    public partial class ShipmentPage : Page
+    public partial class ReportPage : Page
     {
-        public ShipmentPage()
+        public ReportPage()
         {
             InitializeComponent();
         }

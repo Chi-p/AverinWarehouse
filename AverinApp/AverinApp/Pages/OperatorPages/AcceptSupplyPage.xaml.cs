@@ -27,37 +27,35 @@ namespace AverinApp.Pages.OperatorPages
         {
             InitializeComponent();
             _supply = supply;
-            DataContext = _supply;
             Load();
         }
 
         private void Load()
         {
+            AppData.Context.ChangeTracker.Entries<WarehouseOfProduct>().ToList().ForEach(i => i.Reload());
             ICProducts.ItemsSource = _supply.SupplyOfProduct.ToList();
-        }
-
-        private void UpdateIC()
-        {
-            ICProducts.ItemsSource = null;
-            ICProducts.ItemsSource = _supply.SupplyOfProduct.ToList();
-            UpdateContext();
-        }
-
-        private void UpdateContext()
-        {
-            DataContext = null;
             DataContext = _supply;
         }
 
-        private void ChkBxAccept_Checked(object sender, RoutedEventArgs e)
+        private void BtnAccept_Click(object sender, RoutedEventArgs e)
         {
-            UpdateContext();
+            foreach (var item in _supply.SupplyOfProduct.ToList())
+            {
+                _supply.Warehouse.WarehouseOfProduct.Add(new WarehouseOfProduct
+                {
+                    Warehouse = _supply.Warehouse,
+                    Product = item.Product,
+                    Count = item.Count,
+                });
+            }
+            _supply.StatusId = 3;
+            AppData.Context.SaveChanges();
+            NavigationService.GoBack();
         }
 
-        private void ChkBxAcceptAll_Checked(object sender, RoutedEventArgs e)
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            _supply.SupplyOfProduct.ToList().ForEach(i => i.Checked = ChkBxAcceptAll.IsChecked.Value);
-            UpdateIC();
+            NavigationService.GoBack();
         }
     }
 }

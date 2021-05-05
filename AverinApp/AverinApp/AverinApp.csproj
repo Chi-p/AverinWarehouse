@@ -99,6 +99,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\OperatorPages\ReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\OperatorPages\ShipmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,6 +246,9 @@
     </Compile>
     <Compile Include="Pages\OperatorPages\OperatorMenuPage.xaml.cs">
       <DependentUpon>OperatorMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OperatorPages\ReportPage.xaml.cs">
+      <DependentUpon>ReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\OperatorPages\ShipmentPage.xaml.cs">
       <DependentUpon>ShipmentPage.xaml</DependentUpon>

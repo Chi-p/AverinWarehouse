@@ -34,6 +34,7 @@
                                     <controls:SupplyControl Grid.Row="0"/>
                                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="15 -5 5 0" VerticalAlignment="Top"  HorizontalAlignment="Right">
                                         <Button Name="BtnAccept" Click="BtnAccept_Click" Content="Принять"/>
+                                        <Button Name="BtnInfo" Click="BtnInfo_Click" Content="Подробнее"/>
                                         <Button Name="BtnCancel" Click="BtnCancel_Click" Content="Отменить" Style="{StaticResource BtnCancel}"/>
                                     </StackPanel>
                                     <Grid Grid.Row="2" Margin="5 5 5 0" Background="{StaticResource PColor_Second}"/>

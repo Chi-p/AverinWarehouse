@@ -19,34 +19,34 @@
         <Grid Grid.Row="1" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Style="{StaticResource TbkBody}" Text="Общий вес поставляемого товара:" FontWeight="Bold"/>
                 <TextBlock Style="{StaticResource TbkBody}" Text="{Binding TotalWeight, StringFormat={}{0:N3} т.}"/>
             </StackPanel>
-            <CheckBox HorizontalAlignment="Right" Content="Принять все" Name="ChkBxAcceptAll" Checked="ChkBxAcceptAll_Checked" Unchecked="ChkBxAcceptAll_Checked"/>
-            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Style="{StaticResource TbkBody}" Text="Состояние склада:" FontWeight="Bold"/>
                 <TextBlock Style="{StaticResource TbkBody}" Name="Tbx" Text="{Binding Warehouse.Busy,StringFormat= {}{0:N3}}" Margin="5 5 0 5"/>
                 <TextBlock Style="{StaticResource TbkBody}" Text="{Binding Warehouse.Capacity, StringFormat='/ {0:N3} т.'}"/>
             </StackPanel>
-            <ScrollViewer Grid.Row="1" Grid.Column="0" Margin="5">
-                <ItemsControl Name="ICProducts">
+            
+            <ScrollViewer Grid.Row="2" Grid.Column="0" Margin="5">
+                <ItemsControl Name="ICProducts" HorizontalAlignment="Center">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"></WrapPanel>
+                            <WrapPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid Width="430" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+                            <Grid Width="310" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition Height="6"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
@@ -56,27 +56,31 @@
                                 <StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Style="{StaticResource TbkBody}" Width="115" Text="Наименование:" VerticalAlignment="Top" FontWeight="Bold"/>
+                                        <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Width="115" Text="Наименование:" VerticalAlignment="Top" FontWeight="Bold"/>
                                         <TextBlock Style="{StaticResource TbkBody}" TextWrapping="Wrap" Width="180" Text="{Binding Product.Name}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Style="{StaticResource TbkBody}" Width="115" Text="Количество:" VerticalAlignment="Top" FontWeight="Bold"/>
+                                        <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Width="115" Text="Количество:" VerticalAlignment="Top" FontWeight="Bold"/>
                                         <TextBlock Style="{StaticResource TbkBody}" TextWrapping="Wrap" Width="180" Text="{Binding WeightCount}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Style="{StaticResource TbkBody}" Width="115" Text="Сертификат:" VerticalAlignment="Top" FontWeight="Bold"/>
+                                        <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Width="115" Text="Сертификат:" VerticalAlignment="Top" FontWeight="Bold"/>
                                         <TextBlock Style="{StaticResource TbkBody}" TextWrapping="Wrap" Width="180" 
                                                Foreground="{Binding CertificateStateColor}" Text="{Binding CertificateState}"/>
                                     </StackPanel>
                                 </StackPanel>
-                                <CheckBox Grid.Column="1" Content="Принять" IsChecked="{Binding Checked}" Name="ChkBxAccept" 
-                                          Checked="ChkBxAccept_Checked" Unchecked="ChkBxAccept_Checked"/>
                                 <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="{StaticResource PColor_Second}" Margin="0 5 0 0"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+
+            <StackPanel Grid.Row="3" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Name="BtnAccept" Click="BtnAccept_Click" Content="Принять" Padding="25 3" Width="auto"/>
+                <Button Name="BtnBack" Click="BtnBack_Click" Content="Назад" Padding="25 3" Width="auto" Style="{StaticResource BtnCancel}"/>
+
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

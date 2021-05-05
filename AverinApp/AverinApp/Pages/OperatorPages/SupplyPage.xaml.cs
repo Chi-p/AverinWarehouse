@@ -77,7 +77,19 @@ namespace AverinApp.Pages.OperatorPages
 
         private void BtnAccept_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AcceptSupplyPage((sender as Button).DataContext as Supply));
+            Supply supply = (sender as Button).DataContext as Supply;
+            foreach (var item in supply.SupplyOfProduct.ToList())
+            {
+                supply.Warehouse.WarehouseOfProduct.Add(new WarehouseOfProduct
+                {
+                    Warehouse = supply.Warehouse,
+                    Product = item.Product,
+                    Count = item.Count,
+                });
+            }
+            supply.StatusId = 3;
+            AppData.Context.SaveChanges();
+            Update();
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -88,6 +100,11 @@ namespace AverinApp.Pages.OperatorPages
                 AppData.Context.SaveChanges();
                 Update();
             }
+        }
+
+        private void BtnInfo_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AcceptSupplyPage((sender as Button).DataContext as Supply));
         }
     }
 }

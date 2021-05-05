@@ -18,30 +18,6 @@ namespace AverinApp.Entities
             }
         }
 
-        private bool _checked;
-        public bool Checked
-        {
-            get => _checked;
-            set
-            {
-                _checked = value;
-                if (Checked)
-                {
-                    if (Supply.Warehouse.WarehouseOfProduct.ToList().FirstOrDefault(i => i.Product == Product) == null)
-                        Supply.Warehouse.WarehouseOfProduct.Add(new WarehouseOfProduct
-                        {
-                            WarehouseId = Supply.WarehouseId,
-                            Product = Product,
-                            Count = Count
-                        });
-                }
-                else
-                {
-                    Supply.Warehouse.WarehouseOfProduct.Remove(Supply.Warehouse.WarehouseOfProduct.ToList().FirstOrDefault(i => i.Product == Product));
-                }
-            }
-        }
-
         public decimal Weight
         {
             get

@@ -75,3 +75,5 @@ F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\GeneratedInte
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Controls\SupplyControl.baml
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\OperatorPages\AcceptSupplyPage.g.cs
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\OperatorPages\AcceptSupplyPage.baml
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\OperatorPages\ReportPage.g.cs
+F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\obj\Debug\Pages\OperatorPages\ReportPage.baml

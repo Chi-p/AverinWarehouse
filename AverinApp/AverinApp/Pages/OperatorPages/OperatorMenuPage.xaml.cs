@@ -42,18 +42,18 @@ namespace AverinApp.Pages.OperatorPages
 
             if (AppData.CurrentUser.Operator.Warehouse.Count == 0)
             {
-                BtnSupply.IsEnabled = BtnShipment.IsEnabled = false;
+                BtnSupply.IsEnabled = BtnShipment.IsEnabled = BtnReport.IsEnabled = false;
                 TbkErrorMessage.Visibility = Visibility.Visible;
                 return;
             }
             else
             {
-                BtnSupply.IsEnabled = BtnShipment.IsEnabled = true;
+                BtnSupply.IsEnabled = BtnShipment.IsEnabled = BtnReport.IsEnabled = true;
                 TbkErrorMessage.Visibility = Visibility.Hidden;
             }
 
             TbkOfBtnSupply.Text = $"Отгрузка товаров\n на {AppData.CurrentUser.Operator.Warehouse.First().Name.ToLower()}";
-            TbkOfBtnShipment.Text = $"Погрузка товаров\n со {AppData.CurrentUser.Operator.Warehouse.First().Name.ToLower()}";
+            TbkOfBtnShipment.Text = $"Отправка товаров\n со {AppData.CurrentUser.Operator.Warehouse.First().Name.ToLower()}";
 
             foreach (var item in AppData.Context.Supply.ToList().Where(i => i.Status.Name == "В пути" && i.Warehouse == AppData.CurrentUser.Operator.Warehouse.First()))
             {
@@ -65,7 +65,6 @@ namespace AverinApp.Pages.OperatorPages
             }
 
             int supply = AppData.Context.Supply.ToList().Count(i => i.Status.Name == "Ожидает отгрузки" && i.Warehouse == AppData.CurrentUser.Operator.Warehouse.First());
-            int shipment = AppData.Context.Shipment.ToList().Count(i => i.Status.Name == "Ожидает погрузки" && i.Warehouse == AppData.CurrentUser.Operator.Warehouse.First());
             if (supply != 0)
             {
                 BdrSupplyCount.Visibility = Visibility.Visible;
@@ -75,16 +74,6 @@ namespace AverinApp.Pages.OperatorPages
             {
                 BdrSupplyCount.Visibility = Visibility.Collapsed;
                 TbkSupplyCount.Text = "";
-            }
-            if (shipment != 0)
-            {
-                BdrShipmentCount.Visibility = Visibility.Visible;
-                TbkShipmentCount.Text = shipment.ToString();
-            }
-            else
-            {
-                BdrShipmentCount.Visibility = Visibility.Collapsed;
-                TbkShipmentCount.Text = "";
             }
         }
 
@@ -107,6 +96,11 @@ namespace AverinApp.Pages.OperatorPages
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
+        }
+
+        private void BtnReport_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ReportPage());
         }
     }
 }

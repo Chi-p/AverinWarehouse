@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 F:\Programming\repos\AverinWarehouse\AverinApp\AverinApp\App.xaml
-16-576050783
+17159520549
 21861686433
-541241398111
+55633163818
 18176781465
-Controls\SupplyControl.xaml;Pages\AdminPages\AdminMenuPage.xaml;Pages\AdminPages\OperatorsPage.xaml;Pages\AdminPages\ProductsPage.xaml;Pages\AdminPages\WarehousesPage.xaml;Pages\GeneralPages\AuthorizationPage.xaml;Pages\OperatorPages\AcceptSupplyPage.xaml;Pages\OperatorPages\OperatorMenuPage.xaml;Pages\OperatorPages\ShipmentPage.xaml;Pages\OperatorPages\SupplyPage.xaml;Windows\AdditionalWindows\AddCertificateWindow.xaml;Windows\AdditionalWindows\AddManufacturerWindow.xaml;Windows\AdditionalWindows\AddOperatorWindow.xaml;Windows\AdditionalWindows\AddProductWindow.xaml;Windows\AdditionalWindows\AddWarehouseWindow.xaml;Windows\MainWindow.xaml;
+Controls\SupplyControl.xaml;Pages\AdminPages\AdminMenuPage.xaml;Pages\AdminPages\OperatorsPage.xaml;Pages\AdminPages\ProductsPage.xaml;Pages\AdminPages\WarehousesPage.xaml;Pages\GeneralPages\AuthorizationPage.xaml;Pages\OperatorPages\AcceptSupplyPage.xaml;Pages\OperatorPages\OperatorMenuPage.xaml;Pages\OperatorPages\ReportPage.xaml;Pages\OperatorPages\ShipmentPage.xaml;Pages\OperatorPages\SupplyPage.xaml;Windows\AdditionalWindows\AddCertificateWindow.xaml;Windows\AdditionalWindows\AddManufacturerWindow.xaml;Windows\AdditionalWindows\AddOperatorWindow.xaml;Windows\AdditionalWindows\AddProductWindow.xaml;Windows\AdditionalWindows\AddWarehouseWindow.xaml;Windows\MainWindow.xaml;
 
 False
 
