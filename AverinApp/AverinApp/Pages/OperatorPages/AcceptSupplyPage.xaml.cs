@@ -21,7 +21,7 @@ namespace AverinApp.Pages.OperatorPages
     /// </summary>
     public partial class AcceptSupplyPage : Page
     {
-        private Supply _supply;
+        private readonly Supply _supply;
 
         public AcceptSupplyPage(Supply supply)
         {

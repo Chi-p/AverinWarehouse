@@ -70,8 +70,7 @@ namespace AverinApp.Windows.AdditionalWindows
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             string error = "Ошибки ввода:\n";
-            if (string.IsNullOrWhiteSpace(TbxLastName.Text) || string.IsNullOrWhiteSpace(TbxFirstName.Text) || string.IsNullOrWhiteSpace(TbxLogin.Text)
-                || AppData.Context.User.ToList().FirstOrDefault(i => i.Login == TbxLogin.Text) != null)
+            if (string.IsNullOrWhiteSpace(TbxLastName.Text) || string.IsNullOrWhiteSpace(TbxFirstName.Text) || string.IsNullOrWhiteSpace(TbxLogin.Text))
             {
 
                 if (string.IsNullOrWhiteSpace(TbxLastName.Text))
@@ -83,7 +82,7 @@ namespace AverinApp.Windows.AdditionalWindows
                 if (string.IsNullOrWhiteSpace(TbxLogin.Text))
                     error += "Логин не может быть пустым\n";
                 else if (AppData.Context.User.ToList().FirstOrDefault(i => i.Login == TbxLogin.Text) != null)
-                    error += "Оператор с таким логином уже сущуствует\n";
+                    error += "Оператор с таким логином уже существует\n";
 
                 AppData.Message.Error(error);
             }
@@ -91,6 +90,9 @@ namespace AverinApp.Windows.AdditionalWindows
             {
                 if (_user == null)
                 {
+                    if (AppData.Context.User.ToList().FirstOrDefault(i => i.Login == TbxLogin.Text) != null)
+                        error += "Оператор с таким логином уже существует";
+
                     if (string.IsNullOrWhiteSpace(PbxPassword.Password))
                         error += "Пароль не может быть пустым";
                     else if (PbxPassword.Password != PbxRePassword.Password)
@@ -100,7 +102,7 @@ namespace AverinApp.Windows.AdditionalWindows
                 else if (_user != null)
                 {
                     if (AppData.Context.User.ToList().FirstOrDefault(i => i.Login == TbxLogin.Text && i.Login != _user.Login) != null)
-                        error += "Оператор с таким логином уже сущуствует";
+                        error += "Оператор с таким логином уже существует";
 
                     if (_user.Password == PbxPassword.Password)
                         error += "Новый пароль совпадает с вашим старым паролем.\nP.S. - Если вы не хотите менять пароль, оставьте поле пустым.";
@@ -148,13 +150,14 @@ namespace AverinApp.Windows.AdditionalWindows
                     }
                     else if (_parent == "Warehouse")
                     {
+                        AddWarehouseWindow._newOperator = _user.Operator;
                         if (_user.Id == 0)
                             AppData.Context.User.Add(_user);
 
                         AppData.Context.SaveChanges();
-                        AddWarehouseWindow._newOperator = _user.Operator;
                         Close();
                     }
+
                 }
             }
         }
@@ -163,7 +166,7 @@ namespace AverinApp.Windows.AdditionalWindows
         {
             List<User> users = AppData.Context.User.ToList().Where(i => i.Operator != null).Where(i => i.Operator.Warehouse.Count() != 0).ToList();
 
-            if (_user == null)
+            if (_user.Id == 0)
             {
                 if (users.FirstOrDefault(i => i.Operator.Warehouse.First() == CbxWarehouse.SelectedItem as Warehouse) != null)
                 {
@@ -171,7 +174,7 @@ namespace AverinApp.Windows.AdditionalWindows
                     return;
                 }
             }
-            else if (_user != null)
+            else
             {
                 if (_user.Operator.Warehouse.Count != 0)
                 {
@@ -194,6 +197,9 @@ namespace AverinApp.Windows.AdditionalWindows
                 _user.Operator.Warehouse.Clear();
                 _user.Operator.Warehouse.Add(CbxWarehouse.SelectedItem as Warehouse);
             }
+            if (_user.Id == 0)
+                AppData.Context.User.Add(_user);
+
             AppData.Context.SaveChanges();
             AppData.Message.Info("Оператор успешно сохранён!");
             Close();
@@ -201,6 +207,9 @@ namespace AverinApp.Windows.AdditionalWindows
 
         private void BtnIgnore_Click(object sender, RoutedEventArgs e)
         {
+            if (_user.Id == 0)
+                AppData.Context.User.Add(_user);
+
             AppData.Context.SaveChanges();
             AppData.Message.Info("Оператор успешно сохранён!");
             Close();

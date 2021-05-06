@@ -1,0 +1,229 @@
+﻿<Page x:Class="AverinApp.Pages.AdminPages.AddSupplyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:System="clr-namespace:System;assembly=mscorlib"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AverinApp.Pages.AdminPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="Создание отгрузки товаров">
+
+    <Grid>
+        <TabControl Margin="5">
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource TbkBody}" Text="Отгрузка товаров"/>
+                </TabItem.Header>
+
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource TbkBody}" Text="Отгрузка №"/>
+                        <TextBlock Style="{StaticResource TbkBody}" Text="{Binding SupplyContractNumber}" Margin="0 5 5 5" FontWeight="Bold"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Style="{StaticResource TbkBody}" Text="Общий вес:" FontWeight="Bold"/>
+                        <TextBlock Style="{StaticResource TbkBody}" Text="{Binding TotalWeight, StringFormat={}{0:N3} т.}"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="400"/>
+                            <ColumnDefinition Width="2"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Margin="15 5" VerticalAlignment="Center">
+                            <TextBlock Style="{StaticResource TbkBody}" Text="Цена:"/>
+                            <TextBox HorizontalAlignment="Left" Name="TbxPrice" MaxLength="13" Text="0" TextAlignment="Center" Width="150" PreviewTextInput="TbxPrice_PreviewTextInput"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Style="{StaticResource TbkBody}" Text="Дата и время прибытия" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+
+                                <DatePicker HorizontalAlignment="Left" Name="DPDate" Width="180" Grid.Row="1" 
+                                                DisplayDateStart="{Binding Mode=OneWay, Source={x:Static System:DateTime.Today}}"/>
+
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBox Name="TbxHours" Width="auto" Grid.Column="0" Padding="0 3" TextAlignment="Center"  Text="0"
+                                             MaxLength="2" PreviewTextInput="TbxHours_PreviewTextInput" TextChanged="TbxHours_TextChanged"/>
+                                    <TextBlock Style="{StaticResource TbkBody}" Text="ч." Grid.Column="1" Margin="0 5 5 5"/>
+                                    <TextBox Name="TbxMinutes" Width="auto" Grid.Column="2" Padding="0 3" TextAlignment="Center" Text="0"
+                                             MaxLength="2" PreviewTextInput="TbxMinutes_PreviewTextInput" TextChanged="TbxMinutes_TextChanged"/>
+                                    <TextBlock Style="{StaticResource TbkBody}" Text="мин." Grid.Column="3" Margin="0 5 5 5"/>
+                                </Grid>
+                            </Grid>
+                            <TextBlock Style="{StaticResource TbkBody}" Text="Поставщик:"/>
+                            <ComboBox Name="CbxProvider" Width="auto" DisplayMemberPath="Info"/>
+                            <TextBlock Style="{StaticResource TbkBody}" Text="Склад:"/>
+                            <ComboBox Name="CbxWarehouse" Width="auto" DisplayMemberPath="Info"/>
+                        </StackPanel>
+
+                        <Grid Grid.Column="1" Background="{StaticResource PColor_Second}" Margin="0 10"/>
+
+                        <ScrollViewer Grid.Column="2">
+                            <ItemsControl Name="ICProducts" HorizontalAlignment="Center">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="310" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="6"/>
+                                            </Grid.RowDefinitions>
+                                            <StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Width="115" 
+                                                               Text="Наименование:" VerticalAlignment="Top" FontWeight="Bold"/>
+                                                    <TextBlock Style="{StaticResource TbkBody}" TextWrapping="Wrap" Width="180" Text="{Binding Product.Name}"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Style="{StaticResource TbkBody}" HorizontalAlignment="Left"  TextAlignment="Right" 
+                                                               Width="115" Text="Количество:" VerticalAlignment="Top" FontWeight="Bold"/>
+                                                    <TextBox Width="60" MaxLength="5" TextAlignment="Center" Name="TbxProductCount" Grid.Column="1" HorizontalAlignment="Right" 
+                                                             TextChanged="TbxProductCount_TextChanged" PreviewTextInput="TbxProductCount_PreviewTextInput" Text="0"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            
+                                            <Grid Grid.Row="1" Background="{StaticResource PColor_Second}" Margin="0 5 0 0"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                        <Button Name="BtnCreateSupply" Click="BtnCreateSupply_Click" Content="Создать отгрузку" Padding="15 5" Width="auto"/>
+                        <Button Name="BtnSupplyClear" Click="BtnSupplyClear_Click" Content="Очистить всё" Padding="15 5" Width="auto" Style="{StaticResource BtnCancel}"/>
+                    </StackPanel>
+
+                </Grid>
+
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource TbkBody}" Text="Поставщики"/>
+                </TabItem.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Text="Поиск:"/>
+                        <TextBox Name="TbxProviderSearch" Width="250"/>
+                        <TextBlock Style="{StaticResource TbkBody}" Text="Страна:"/>
+                        <ComboBox Name="CbxCountry" Width="200" DisplayMemberPath="Name"/>
+                        <Button VerticalAlignment="Center" Name="BtnProviderSearch" Content="Поиск" Width="auto" Padding="15 5" Margin="15 5 5 5" Click="BtnProviderSearch_Click"/>
+                        <Button VerticalAlignment="Center" Name="BtnProviderClear" Content="Очистить" Width="auto" Padding="15 5" 
+                                Margin="5 5 5 5" Click="BtnProviderClear_Click" Style="{StaticResource BtnCancel}"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" Name="DGProviders" Margin="15 0 15 10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Адрес" Width="1.5*" Binding="{Binding Address}"/>
+                            <DataGridTextColumn Header="Телефон" Width="*" Binding="{Binding Phone}"/>
+                            <DataGridTextColumn Header="Страна" Width="*" Binding="{Binding Country.Name}"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="BtnProviderEdit" Click="BtnProviderEdit_Click" Content="Редактировать" Padding="10 3" Width="auto"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="BtnProviderDelete" Click="BtnProviderDelete_Click" Content="Удалить" Width="auto" 
+                                    Padding="10 3" Style="{StaticResource BtnCancel}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Grid.Row="2" HorizontalAlignment="Right" Margin="0 0 15 5" Width="auto" Padding="20 5" 
+                Content="Добавить нового поставщика" Name="BtnAddProvider" VerticalAlignment="Center" Click="BtnAddProvider_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource TbkBody}" Text="Клиенты"/>
+                </TabItem.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Text="Поиск:"/>
+                        <TextBox Name="TbxClientSearch" Width="250"/>
+                        <Button VerticalAlignment="Center" Name="BtnClientSearch" Content="Поиск" Width="auto" Padding="15 5" Margin="15 5 5 5" Click="BtnClientSearch_Click"/>
+                        <Button VerticalAlignment="Center" Name="BtnClientClear" Content="Очистить" Width="auto" Padding="15 5" 
+                                Margin="5 5 5 5" Click="BtnClientClear_Click" Style="{StaticResource BtnCancel}"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" Name="DGClients" Margin="15 0 15 10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Адрес" Width="1.5*" Binding="{Binding Address}"/>
+                            <DataGridTextColumn Header="Телефон" Width="0.8*" Binding="{Binding Phone}"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="BtnClientEdit" Click="BtnClientEdit_Click" Content="Редактировать" Padding="10 3" Width="auto"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="BtnClientDelete" Click="BtnClientDelete_Click" Content="Удалить" Width="auto" 
+                                    Padding="10 3" Style="{StaticResource BtnCancel}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Grid.Row="2" HorizontalAlignment="Right" Margin="0 0 15 5" Width="auto" Padding="20 5" 
+                Content="Добавить нового клиента" Name="BtnAddClient" VerticalAlignment="Center" Click="BtnAddClient_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

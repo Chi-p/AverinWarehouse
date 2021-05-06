@@ -17,11 +17,18 @@
 
         <TextBlock HorizontalAlignment="Center" Style="{StaticResource TbkBody}" Text="{Binding Greeting}" VerticalAlignment="Top" FontSize="30" Margin="0 20 0 0"/>
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Margin="10" Height="100" Width="150" Name="BtnProducts" Click="BtnProducts_Click" Content="Продукты" FontSize="26"/>
-            <Button Margin="10" Height="100" Width="150" Name="BtnWarehouses" Click="BtnWarehouses_Click" Content="Склады" FontSize="26"/>
-            <Button Margin="10" Height="100" Width="150" Name="BtnOperators" Click="BtnOperators_Click" Content="Операторы" FontSize="26"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+            <StackPanel  Orientation="Horizontal">
+                <Button Margin="10" Height="100" Width="150" Name="BtnWarehouses" Click="BtnWarehouses_Click" Content="Склады" FontSize="26"/>
+                <Button Margin="10" Height="100" Width="150" Name="BtnOperators" Click="BtnOperators_Click" Content="Операторы" FontSize="26"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="10" Height="100" Width="150" Name="BtnProducts" Click="BtnProducts_Click" Content="Продукты" FontSize="26"/>
+                <Button Margin="10" Height="100" Width="150" Name="BtnSupply" Click="BtnSupply_Click">
+                    <TextBlock Style="{StaticResource TbkBody}" Text="Отгрузка&#10;товаров" TextAlignment="Center" FontSize="26" Foreground="White"/>
+                </Button>
+            </StackPanel>
         </StackPanel>
-        
+
     </Grid>
 </Page>

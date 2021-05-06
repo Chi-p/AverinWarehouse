@@ -187,7 +187,9 @@ namespace AverinApp.Windows.AdditionalWindows
                     _product.Weight = Convert.ToDecimal(TbxWeight.Text);
                     _product.MeasureUnit = TbxUnit.Text;
                     _product.Price = Convert.ToDecimal(TbxPrice.Text);
-                    _product.Certificate = _certificate;
+                    if (_certificate != null)
+                        _product.Certificate = _certificate;
+
                     AppData.Context.SaveChanges();
                     AppData.Message.Info("Продукт успешно сохранён!");
                     Close();

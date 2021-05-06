@@ -41,5 +41,10 @@ namespace AverinApp.Pages.AdminPages
         {
             NavigationService.Navigate(new OperatorsPage());
         }
+
+        private void BtnSupply_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddSupplyPage());
+        }
     }
 }

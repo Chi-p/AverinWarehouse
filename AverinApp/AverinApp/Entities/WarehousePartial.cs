@@ -30,5 +30,13 @@ namespace AverinApp.Entities
                 return WarehouseOfProduct.ToList().Sum(i=>i.Weight);
             }
         }
+
+        public string Info
+        {
+            get
+            {
+                return $"{Name}, {Address}";
+            }
+        }
     }
 }

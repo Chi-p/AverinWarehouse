@@ -19,6 +19,7 @@ namespace AverinApp.Entities
         public string ProductNumber { get; set; }
         public decimal Count { get; set; }
     
+        public virtual Product Product { get; set; }
         public virtual Shipment Shipment { get; set; }
     }
 }

@@ -82,10 +82,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="WarehouseId" Type="int" Nullable="false" />
     <Property Name="ShipmentContractNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="StatusId" Type="int" Nullable="false" />
     <Property Name="ProviderId" Type="int" Nullable="false" />
     <Property Name="ClientId" Type="int" Nullable="false" />
-    <Property Name="OperatorId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ShipmentContract">
     <Key>
@@ -120,7 +118,6 @@
     <Property Name="SupplyContractNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="StatusId" Type="int" Nullable="false" />
     <Property Name="WarehouseId" Type="int" Nullable="false" />
-    <Property Name="OperatorId" Type="int" />
   </EntityType>
   <EntityType Name="SupplyContract">
     <Key>
@@ -249,18 +246,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Shipment_Operator">
-    <End Role="Operator" Type="Self.Operator" Multiplicity="1" />
-    <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Operator">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Shipment">
-        <PropertyRef Name="OperatorId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Shipment_Provider">
     <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
     <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
@@ -285,18 +270,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Shipment_Status">
-    <End Role="Status" Type="Self.Status" Multiplicity="1" />
-    <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Shipment">
-        <PropertyRef Name="StatusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Shipment_Warehouse">
     <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
     <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
@@ -309,6 +282,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ShipmentOfProduct_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ShipmentOfProduct" Type="Self.ShipmentOfProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Number" />
+      </Principal>
+      <Dependent Role="ShipmentOfProduct">
+        <PropertyRef Name="ProductNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ShipmentOfProduct_Shipment">
     <End Role="Shipment" Type="Self.Shipment" Multiplicity="1" />
     <End Role="ShipmentOfProduct" Type="Self.ShipmentOfProduct" Multiplicity="*" />
@@ -318,18 +303,6 @@
       </Principal>
       <Dependent Role="ShipmentOfProduct">
         <PropertyRef Name="ShipmentId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Supply_Operator">
-    <End Role="Operator" Type="Self.Operator" Multiplicity="0..1" />
-    <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Operator">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Supply">
-        <PropertyRef Name="OperatorId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -497,10 +470,6 @@
       <End Role="Client" EntitySet="Client" />
       <End Role="Shipment" EntitySet="Shipment" />
     </AssociationSet>
-    <AssociationSet Name="FK_Shipment_Operator" Association="Self.FK_Shipment_Operator">
-      <End Role="Operator" EntitySet="Operator" />
-      <End Role="Shipment" EntitySet="Shipment" />
-    </AssociationSet>
     <AssociationSet Name="FK_Shipment_Provider" Association="Self.FK_Shipment_Provider">
       <End Role="Provider" EntitySet="Provider" />
       <End Role="Shipment" EntitySet="Shipment" />
@@ -509,21 +478,17 @@
       <End Role="ShipmentContract" EntitySet="ShipmentContract" />
       <End Role="Shipment" EntitySet="Shipment" />
     </AssociationSet>
-    <AssociationSet Name="FK_Shipment_Status" Association="Self.FK_Shipment_Status">
-      <End Role="Status" EntitySet="Status" />
-      <End Role="Shipment" EntitySet="Shipment" />
-    </AssociationSet>
     <AssociationSet Name="FK_Shipment_Warehouse" Association="Self.FK_Shipment_Warehouse">
       <End Role="Warehouse" EntitySet="Warehouse" />
       <End Role="Shipment" EntitySet="Shipment" />
     </AssociationSet>
+    <AssociationSet Name="FK_ShipmentOfProduct_Product" Association="Self.FK_ShipmentOfProduct_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ShipmentOfProduct" EntitySet="ShipmentOfProduct" />
+    </AssociationSet>
     <AssociationSet Name="FK_ShipmentOfProduct_Shipment" Association="Self.FK_ShipmentOfProduct_Shipment">
       <End Role="Shipment" EntitySet="Shipment" />
       <End Role="ShipmentOfProduct" EntitySet="ShipmentOfProduct" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Supply_Operator" Association="Self.FK_Supply_Operator">
-      <End Role="Operator" EntitySet="Operator" />
-      <End Role="Supply" EntitySet="Supply" />
     </AssociationSet>
     <AssociationSet Name="FK_Supply_Provider" Association="Self.FK_Supply_Provider">
       <End Role="Provider" EntitySet="Provider" />

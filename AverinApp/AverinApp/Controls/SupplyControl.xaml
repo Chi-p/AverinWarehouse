@@ -16,7 +16,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource TbkBody}" TextAlignment="Right" Width="145" FontSize="18" Text="Дата и время&#10;прибытия:" FontWeight="Bold"/>
-                    <TextBlock Style="{StaticResource TbkBody}" VerticalAlignment="Bottom" Text="{Binding SupplyContract.Date, StringFormat='dd MMMM yyyy г., hh ч. mm мин.'}"/>
+                    <TextBlock Style="{StaticResource TbkBody}" VerticalAlignment="Bottom" Text="{Binding SupplyContract.Date, StringFormat='dd MMMM yyyy г., HH ч. mm мин.'}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource TbkBody}" VerticalAlignment="Top" TextAlignment="Right" Width="145" FontSize="18" Text="Поставщик:" FontWeight="Bold"/>

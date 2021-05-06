@@ -17,6 +17,7 @@ namespace AverinApp.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            this.ShipmentOfProduct = new HashSet<ShipmentOfProduct>();
             this.SupplyOfProduct = new HashSet<SupplyOfProduct>();
             this.WarehouseOfProduct = new HashSet<WarehouseOfProduct>();
         }
@@ -30,6 +31,8 @@ namespace AverinApp.Entities
         public decimal Price { get; set; }
     
         public virtual Certificate Certificate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShipmentOfProduct> ShipmentOfProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplyOfProduct> SupplyOfProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

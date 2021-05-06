@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AverinApp.Windows.AdditionalWindows"
         mc:Ignorable="d"
-       Title="AddWarehouseWindow" Height="380" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+       Title="AddManufacturerWindow" Height="380" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

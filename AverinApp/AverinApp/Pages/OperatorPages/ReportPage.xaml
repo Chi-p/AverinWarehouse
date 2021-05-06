@@ -5,10 +5,60 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AverinApp.Pages.OperatorPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ReportPage">
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="Оператор. Отчёты">
 
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Name="SPType" Visibility="Visible">
+            <TextBlock Style="{StaticResource TbkBody}" Text="Выберите тип данных в отчёте" FontSize="24" Margin="5 5 5 15"/>
+            <Button Width="auto" Padding="25 5" FontSize="20" Content="Отгрузки" Name="BtnSupplies" HorizontalAlignment="Center" Click="BtnSupplies_Click"/>
+            <Button Width="auto" Padding="25 5" FontSize="20" Content="Поставки" Name="BtnShipments" HorizontalAlignment="Center" Click="BtnShipments_Click"/>
+        </StackPanel>
+
+        <Grid Name="GridSupplies" Margin="5" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Style="{StaticResource TbkBody}" Text="В промежутке от" Margin="10 5 5 5"/>
+                <DatePicker Name="DpSupplyStartDate"/>
+                <TextBlock Style="{StaticResource TbkBody}" Text="до"/>
+                <DatePicker Name="DpSupplyEndDate"/>
+                <Button Name="BtnSupplyReport" Click="BtnSupplyReport_Click" Padding="15 3" Width="auto" Content="Сформировать"/>
+                <Button Name="BtnSupplyClear" Click="BtnSupplyClear_Click" Padding="15 3" Width="auto" Content="Очистить" Style="{StaticResource BtnCancel}"/>
+            </StackPanel>
+
+            <WebBrowser Name="WBSupply" Grid.Row="1" Margin="5" Visibility="Hidden"/>
+
+            <Button Name="BtnSupplyBack" Content="Выбрать другой тип" Padding="15 3" Grid.Row="2" Width="auto" 
+                    HorizontalAlignment="Left" Click="BtnSupplyBack_Click" Style="{StaticResource BtnEdit}"/>
+            <Button Name="BtnSupplyPrint" Content="Печать" Padding="25 3" Grid.Row="2" Width="auto" HorizontalAlignment="Right" Click="BtnSupplyPrint_Click"/>
+        </Grid>
+
+        <Grid Name="GridShipments" Margin="5" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Style="{StaticResource TbkBody}" Text="В промежутке от" Margin="10 5 5 5"/>
+                <DatePicker Name="DpShipmentStartDate"/>
+                <TextBlock Style="{StaticResource TbkBody}" Text="до"/>
+                <DatePicker Name="DpShipmentEndDate"/>
+                <Button Name="BtnShipmentReport" Click="BtnShipmentReport_Click" Padding="15 3" Width="auto" Content="Сформировать"/>
+                <Button Name="BtnShipmentClear" Click="BtnShipmentClear_Click" Padding="15 3" Width="auto" Content="Очистить" Style="{StaticResource BtnCancel}"/>
+            </StackPanel>
+
+            <WebBrowser Name="WBShipment" Grid.Row="1" Margin="5" Visibility="Hidden"/>
+
+            <Button Name="BtnShipmentBack" Content="Выбрать другой тип" Padding="15 3" Grid.Row="2" Width="auto" 
+                    HorizontalAlignment="Left" Click="BtnShipmentBack_Click" Style="{StaticResource BtnEdit}"/>
+            <Button Name="BtnShipmentPrint" Content="Печать" Padding="25 3" Grid.Row="2" Width="auto" HorizontalAlignment="Right" Click="BtnShipmentPrint_Click"/>
+        </Grid>
     </Grid>
 </Page>

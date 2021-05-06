@@ -87,10 +87,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WarehouseId" Type="int" Nullable="false" />
           <Property Name="ShipmentContractNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="ProviderId" Type="int" Nullable="false" />
           <Property Name="ClientId" Type="int" Nullable="false" />
-          <Property Name="OperatorId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ShipmentContract">
           <Key>
@@ -125,7 +123,6 @@
           <Property Name="SupplyContractNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="WarehouseId" Type="int" Nullable="false" />
-          <Property Name="OperatorId" Type="int" />
         </EntityType>
         <EntityType Name="SupplyContract">
           <Key>
@@ -254,18 +251,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Shipment_Operator">
-          <End Role="Operator" Type="Self.Operator" Multiplicity="1" />
-          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Operator">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Shipment">
-              <PropertyRef Name="OperatorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Shipment_Provider">
           <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
           <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
@@ -290,18 +275,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Shipment_Status">
-          <End Role="Status" Type="Self.Status" Multiplicity="1" />
-          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Shipment">
-              <PropertyRef Name="StatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Shipment_Warehouse">
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
           <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
@@ -314,6 +287,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ShipmentOfProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ShipmentOfProduct" Type="Self.ShipmentOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="ShipmentOfProduct">
+              <PropertyRef Name="ProductNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ShipmentOfProduct_Shipment">
           <End Role="Shipment" Type="Self.Shipment" Multiplicity="1" />
           <End Role="ShipmentOfProduct" Type="Self.ShipmentOfProduct" Multiplicity="*" />
@@ -323,18 +308,6 @@
             </Principal>
             <Dependent Role="ShipmentOfProduct">
               <PropertyRef Name="ShipmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Supply_Operator">
-          <End Role="Operator" Type="Self.Operator" Multiplicity="0..1" />
-          <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Operator">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Supply">
-              <PropertyRef Name="OperatorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -502,10 +475,6 @@
             <End Role="Client" EntitySet="Client" />
             <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Shipment_Operator" Association="Self.FK_Shipment_Operator">
-            <End Role="Operator" EntitySet="Operator" />
-            <End Role="Shipment" EntitySet="Shipment" />
-          </AssociationSet>
           <AssociationSet Name="FK_Shipment_Provider" Association="Self.FK_Shipment_Provider">
             <End Role="Provider" EntitySet="Provider" />
             <End Role="Shipment" EntitySet="Shipment" />
@@ -514,21 +483,17 @@
             <End Role="ShipmentContract" EntitySet="ShipmentContract" />
             <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Shipment_Status" Association="Self.FK_Shipment_Status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="Shipment" EntitySet="Shipment" />
-          </AssociationSet>
           <AssociationSet Name="FK_Shipment_Warehouse" Association="Self.FK_Shipment_Warehouse">
             <End Role="Warehouse" EntitySet="Warehouse" />
             <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
+          <AssociationSet Name="FK_ShipmentOfProduct_Product" Association="Self.FK_ShipmentOfProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ShipmentOfProduct" EntitySet="ShipmentOfProduct" />
+          </AssociationSet>
           <AssociationSet Name="FK_ShipmentOfProduct_Shipment" Association="Self.FK_ShipmentOfProduct_Shipment">
             <End Role="Shipment" EntitySet="Shipment" />
             <End Role="ShipmentOfProduct" EntitySet="ShipmentOfProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Supply_Operator" Association="Self.FK_Supply_Operator">
-            <End Role="Operator" EntitySet="Operator" />
-            <End Role="Supply" EntitySet="Supply" />
           </AssociationSet>
           <AssociationSet Name="FK_Supply_Provider" Association="Self.FK_Supply_Provider">
             <End Role="Provider" EntitySet="Provider" />
@@ -619,17 +584,13 @@
             <End Role="User" EntitySet="User" />
             <End Role="Operator" EntitySet="Operator" />
           </AssociationSet>
-          <AssociationSet Name="FK_Shipment_Operator" Association="AverinWarehouseDbModel.FK_Shipment_Operator">
-            <End Role="Operator" EntitySet="Operator" />
-            <End Role="Shipment" EntitySet="Shipment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Supply_Operator" Association="AverinWarehouseDbModel.FK_Supply_Operator">
-            <End Role="Operator" EntitySet="Operator" />
-            <End Role="Supply" EntitySet="Supply" />
-          </AssociationSet>
           <AssociationSet Name="FK_Warehouse_Operator" Association="AverinWarehouseDbModel.FK_Warehouse_Operator">
             <End Role="Operator" EntitySet="Operator" />
             <End Role="Warehouse" EntitySet="Warehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShipmentOfProduct_Product" Association="AverinWarehouseDbModel.FK_ShipmentOfProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ShipmentOfProduct" EntitySet="ShipmentOfProduct" />
           </AssociationSet>
           <AssociationSet Name="FK_SupplyOfProduct_Product" Association="AverinWarehouseDbModel.FK_SupplyOfProduct_Product">
             <End Role="Product" EntitySet="Product" />
@@ -653,10 +614,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Shipment_ShipmentContract" Association="AverinWarehouseDbModel.FK_Shipment_ShipmentContract">
             <End Role="ShipmentContract" EntitySet="ShipmentContract" />
-            <End Role="Shipment" EntitySet="Shipment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Shipment_Status" Association="AverinWarehouseDbModel.FK_Shipment_Status">
-            <End Role="Status" EntitySet="Status" />
             <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
           <AssociationSet Name="FK_Shipment_Warehouse" Association="AverinWarehouseDbModel.FK_Shipment_Warehouse">
@@ -741,8 +698,6 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="AverinWarehouseDbModel.FK_Operator_User" FromRole="Operator" ToRole="User" />
-          <NavigationProperty Name="Shipment" Relationship="AverinWarehouseDbModel.FK_Shipment_Operator" FromRole="Operator" ToRole="Shipment" />
-          <NavigationProperty Name="Supply" Relationship="AverinWarehouseDbModel.FK_Supply_Operator" FromRole="Operator" ToRole="Supply" />
           <NavigationProperty Name="Warehouse" Relationship="AverinWarehouseDbModel.FK_Warehouse_Operator" FromRole="Operator" ToRole="Warehouse" />
         </EntityType>
         <EntityType Name="Product">
@@ -757,6 +712,7 @@
           <Property Name="CertificateNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <NavigationProperty Name="Certificate" Relationship="AverinWarehouseDbModel.FK_Product_Certificate" FromRole="Product" ToRole="Certificate" />
+          <NavigationProperty Name="ShipmentOfProduct" Relationship="AverinWarehouseDbModel.FK_ShipmentOfProduct_Product" FromRole="Product" ToRole="ShipmentOfProduct" />
           <NavigationProperty Name="SupplyOfProduct" Relationship="AverinWarehouseDbModel.FK_SupplyOfProduct_Product" FromRole="Product" ToRole="SupplyOfProduct" />
           <NavigationProperty Name="WarehouseOfProduct" Relationship="AverinWarehouseDbModel.FK_WarehouseOfProduct_Product" FromRole="Product" ToRole="WarehouseOfProduct" />
         </EntityType>
@@ -788,15 +744,11 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WarehouseId" Type="Int32" Nullable="false" />
           <Property Name="ShipmentContractNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="StatusId" Type="Int32" Nullable="false" />
           <Property Name="ProviderId" Type="Int32" Nullable="false" />
           <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="OperatorId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="AverinWarehouseDbModel.FK_Shipment_Client" FromRole="Shipment" ToRole="Client" />
-          <NavigationProperty Name="Operator" Relationship="AverinWarehouseDbModel.FK_Shipment_Operator" FromRole="Shipment" ToRole="Operator" />
           <NavigationProperty Name="Provider" Relationship="AverinWarehouseDbModel.FK_Shipment_Provider" FromRole="Shipment" ToRole="Provider" />
           <NavigationProperty Name="ShipmentContract" Relationship="AverinWarehouseDbModel.FK_Shipment_ShipmentContract" FromRole="Shipment" ToRole="ShipmentContract" />
-          <NavigationProperty Name="Status" Relationship="AverinWarehouseDbModel.FK_Shipment_Status" FromRole="Shipment" ToRole="Status" />
           <NavigationProperty Name="Warehouse" Relationship="AverinWarehouseDbModel.FK_Shipment_Warehouse" FromRole="Shipment" ToRole="Warehouse" />
           <NavigationProperty Name="ShipmentOfProduct" Relationship="AverinWarehouseDbModel.FK_ShipmentOfProduct_Shipment" FromRole="Shipment" ToRole="ShipmentOfProduct" />
         </EntityType>
@@ -817,6 +769,7 @@
           <Property Name="ShipmentId" Type="Int32" Nullable="false" />
           <Property Name="ProductNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Product" Relationship="AverinWarehouseDbModel.FK_ShipmentOfProduct_Product" FromRole="ShipmentOfProduct" ToRole="Product" />
           <NavigationProperty Name="Shipment" Relationship="AverinWarehouseDbModel.FK_ShipmentOfProduct_Shipment" FromRole="ShipmentOfProduct" ToRole="Shipment" />
         </EntityType>
         <EntityType Name="Status">
@@ -825,7 +778,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Shipment" Relationship="AverinWarehouseDbModel.FK_Shipment_Status" FromRole="Status" ToRole="Shipment" />
           <NavigationProperty Name="Supply" Relationship="AverinWarehouseDbModel.FK_Supply_Status" FromRole="Status" ToRole="Supply" />
         </EntityType>
         <EntityType Name="Supply">
@@ -837,8 +789,6 @@
           <Property Name="SupplyContractNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="StatusId" Type="Int32" Nullable="false" />
           <Property Name="WarehouseId" Type="Int32" Nullable="false" />
-          <Property Name="OperatorId" Type="Int32" />
-          <NavigationProperty Name="Operator" Relationship="AverinWarehouseDbModel.FK_Supply_Operator" FromRole="Supply" ToRole="Operator" />
           <NavigationProperty Name="Provider" Relationship="AverinWarehouseDbModel.FK_Supply_Provider" FromRole="Supply" ToRole="Provider" />
           <NavigationProperty Name="Status" Relationship="AverinWarehouseDbModel.FK_Supply_Status" FromRole="Supply" ToRole="Status" />
           <NavigationProperty Name="SupplyContract" Relationship="AverinWarehouseDbModel.FK_Supply_SupplyContract" FromRole="Supply" ToRole="SupplyContract" />
@@ -983,30 +933,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Shipment_Operator">
-          <End Type="AverinWarehouseDbModel.Operator" Role="Operator" Multiplicity="1" />
-          <End Type="AverinWarehouseDbModel.Shipment" Role="Shipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Operator">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Shipment">
-              <PropertyRef Name="OperatorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Supply_Operator">
-          <End Type="AverinWarehouseDbModel.Operator" Role="Operator" Multiplicity="0..1" />
-          <End Type="AverinWarehouseDbModel.Supply" Role="Supply" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Operator">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Supply">
-              <PropertyRef Name="OperatorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Warehouse_Operator">
           <End Type="AverinWarehouseDbModel.Operator" Role="Operator" Multiplicity="0..1" />
           <End Type="AverinWarehouseDbModel.Warehouse" Role="Warehouse" Multiplicity="*" />
@@ -1016,6 +942,18 @@
             </Principal>
             <Dependent Role="Warehouse">
               <PropertyRef Name="OperatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShipmentOfProduct_Product">
+          <End Type="AverinWarehouseDbModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="AverinWarehouseDbModel.ShipmentOfProduct" Role="ShipmentOfProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="ShipmentOfProduct">
+              <PropertyRef Name="ProductNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1088,18 +1026,6 @@
             </Principal>
             <Dependent Role="Shipment">
               <PropertyRef Name="ShipmentContractNumber" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Shipment_Status">
-          <End Type="AverinWarehouseDbModel.Status" Role="Status" Multiplicity="1" />
-          <End Type="AverinWarehouseDbModel.Shipment" Role="Shipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Shipment">
-              <PropertyRef Name="StatusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1279,10 +1205,8 @@
           <EntitySetMapping Name="Shipment">
             <EntityTypeMapping TypeName="AverinWarehouseDbModel.Shipment">
               <MappingFragment StoreEntitySet="Shipment">
-                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="ShipmentContractNumber" ColumnName="ShipmentContractNumber" />
                 <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1319,7 +1243,6 @@
           <EntitySetMapping Name="Supply">
             <EntityTypeMapping TypeName="AverinWarehouseDbModel.Supply">
               <MappingFragment StoreEntitySet="Supply">
-                <ScalarProperty Name="OperatorId" ColumnName="OperatorId" />
                 <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="SupplyContractNumber" ColumnName="SupplyContractNumber" />

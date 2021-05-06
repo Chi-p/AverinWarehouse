@@ -35,6 +35,18 @@ namespace AverinApp.Entities
         }
 
 
+        public decimal TotalCount
+        {
+            get
+            {
+                decimal count = 0;
+                foreach (var item in Warehouse.WarehouseOfProduct.ToList().Where(i => i.Product == Product).ToList())
+                    count += item.Count;
+
+                return count;
+            }
+        }
+
         public string WeightCount
         {
             get

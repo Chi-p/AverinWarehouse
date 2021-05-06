@@ -118,12 +118,12 @@ namespace AverinApp.Windows.AdditionalWindows
                     }
                     if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Name == TbxName.Text && i.Name != _warehouse.Name) != null)
                     {
-                        AppData.Message.Error("Склад с таким адресом уже сущуствует");
+                        AppData.Message.Error("Склад с таким адресом уже существует");
                         return;
                     }
                     if (AppData.Context.Warehouse.ToList().FirstOrDefault(i => i.Address == TbxAdress.Text && i.Address != _warehouse.Address) != null)
                     {
-                        AppData.Message.Error("Склад с таким адресом уже сущуствует");
+                        AppData.Message.Error("Склад с таким адресом уже существует");
                         return;
                     }
 

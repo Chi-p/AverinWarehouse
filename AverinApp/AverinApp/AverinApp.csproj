@@ -44,6 +44,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -68,6 +71,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\SupplyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminPages\AddSupplyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,6 +122,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\AdditionalWindows\AddClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AdditionalWindows\AddManufacturerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AdditionalWindows\AddProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AdditionalWindows\AddProviderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +167,7 @@
     <Compile Include="Entities\Client.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ClientPartial.cs" />
     <Compile Include="Entities\Country.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
@@ -185,6 +201,7 @@
     <Compile Include="Entities\Provider.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ProviderPartial.cs" />
     <Compile Include="Entities\Role.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
@@ -197,6 +214,8 @@
     <Compile Include="Entities\ShipmentOfProduct.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ShipmentOfProductPartial.cs" />
+    <Compile Include="Entities\ShipmentPartial.cs" />
     <Compile Include="Entities\Status.cs">
       <DependentUpon>ModelDb.tt</DependentUpon>
     </Compile>
@@ -226,6 +245,9 @@
     </Compile>
     <Compile Include="Entities\WarehouseOfProductPartial.cs" />
     <Compile Include="Entities\WarehousePartial.cs" />
+    <Compile Include="Pages\AdminPages\AddSupplyPage.xaml.cs">
+      <DependentUpon>AddSupplyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdminPages\AdminMenuPage.xaml.cs">
       <DependentUpon>AdminMenuPage.xaml</DependentUpon>
     </Compile>
@@ -259,6 +281,9 @@
     <Compile Include="Windows\AdditionalWindows\AddCertificateWindow.xaml.cs">
       <DependentUpon>AddCertificateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\AdditionalWindows\AddClientWindow.xaml.cs">
+      <DependentUpon>AddClientWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AdditionalWindows\AddManufacturerWindow.xaml.cs">
       <DependentUpon>AddManufacturerWindow.xaml</DependentUpon>
     </Compile>
@@ -267,6 +292,9 @@
     </Compile>
     <Compile Include="Windows\AdditionalWindows\AddProductWindow.xaml.cs">
       <DependentUpon>AddProductWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AdditionalWindows\AddProviderWindow.xaml.cs">
+      <DependentUpon>AddProviderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\AdditionalWindows\AddWarehouseWindow.xaml.cs">
       <DependentUpon>AddWarehouseWindow.xaml</DependentUpon>

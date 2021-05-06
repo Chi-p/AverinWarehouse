@@ -25,9 +25,7 @@ namespace AverinApp.Entities
         public string SupplyContractNumber { get; set; }
         public int StatusId { get; set; }
         public int WarehouseId { get; set; }
-        public Nullable<int> OperatorId { get; set; }
     
-        public virtual Operator Operator { get; set; }
         public virtual Provider Provider { get; set; }
         public virtual Status Status { get; set; }
         public virtual SupplyContract SupplyContract { get; set; }

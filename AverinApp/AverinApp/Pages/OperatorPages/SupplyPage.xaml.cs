@@ -44,7 +44,7 @@ namespace AverinApp.Pages.OperatorPages
 
             _supplies = AppData.Context.Supply.ToList().Where(i => i.Warehouse == _warehouse).ToList();
 
-            foreach (var item in _supplies.Where(i => i.Status.Name == "В пути"))
+            foreach (var item in _supplies.Where(i => i.StatusId == 6))
             {
                 if (item.SupplyContract.Date < DateTime.Now)
                 {
@@ -53,10 +53,10 @@ namespace AverinApp.Pages.OperatorPages
                 }
             }
 
-            int waited = _supplies.Count(i => i.Status.Name == "Ожидает отгрузки");
-            int completed = _supplies.Count(i => i.Status.Name == "Отгружен");
-            int transist = _supplies.Count(i => i.Status.Name == "В пути");
-            int canceled = _supplies.Count(i => i.Status.Name == "Отменён");
+            int waited = _supplies.Count(i => i.StatusId == 1);
+            int completed = _supplies.Count(i => i.StatusId == 3);
+            int transist = _supplies.Count(i => i.StatusId == 6);
+            int canceled = _supplies.Count(i => i.StatusId == 5);
 
             TbkWaited.Text = $"Ожидают ({waited})";
             TbkCompleted.Text = $"Отгруженные ({completed})";
@@ -64,10 +64,10 @@ namespace AverinApp.Pages.OperatorPages
             TbkCanceled.Text = $"Отменённые ({canceled})";
 
             ICTransist.ItemsSource = ICWaited.ItemsSource = ICCanceled.ItemsSource = ICCompleted.ItemsSource = null;
-            ICWaited.ItemsSource = _supplies.Where(i => i.Status.Name == "Ожидает отгрузки");
-            ICCompleted.ItemsSource = _supplies.Where(i => i.Status.Name == "Отгружен");
-            ICTransist.ItemsSource = _supplies.Where(i => i.Status.Name == "В пути");
-            ICCanceled.ItemsSource = _supplies.Where(i => i.Status.Name == "Отменён");
+            ICWaited.ItemsSource = _supplies.Where(i => i.StatusId == 1);
+            ICCompleted.ItemsSource = _supplies.Where(i => i.StatusId == 3);
+            ICTransist.ItemsSource = _supplies.Where(i => i.StatusId == 6);
+            ICCanceled.ItemsSource = _supplies.Where(i => i.StatusId == 5);
         }
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)

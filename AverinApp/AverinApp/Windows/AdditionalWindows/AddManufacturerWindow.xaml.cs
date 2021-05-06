@@ -70,12 +70,12 @@ namespace AverinApp.Windows.AdditionalWindows
             {
                 if (AppData.Context.Manufacturer.ToList().FirstOrDefault(i => i.Name == TbxName.Text) != null)
                 {
-                    AppData.Message.Error("Производитель с таким названием уже сущуствует");
+                    AppData.Message.Error("Производитель с таким названием уже существует");
                     return;
                 }
                 if (AppData.Context.Manufacturer.ToList().FirstOrDefault(i => i.Phone == TbxPhone.Text) != null)
                 {
-                    AppData.Message.Error("Производитель с таким номером телефона уже сущуствует");
+                    AppData.Message.Error("Производитель с таким номером телефона уже существует");
                     return;
                 }
 
@@ -95,12 +95,12 @@ namespace AverinApp.Windows.AdditionalWindows
                 {
                     if (AppData.Context.Manufacturer.ToList().FirstOrDefault(i => i.Name == TbxName.Text && i.Name != _manufacturer.Name) != null)
                     {
-                        AppData.Message.Error("Производитель с таким названием уже сущуствует");
+                        AppData.Message.Error("Производитель с таким названием уже существует");
                         return;
                     }
                     if (AppData.Context.Manufacturer.ToList().FirstOrDefault(i => i.Phone == TbxPhone.Text && i.Phone != _manufacturer.Phone) != null)
                     {
-                        AppData.Message.Error("Производитель с таким номером телефона уже сущуствует");
+                        AppData.Message.Error("Производитель с таким номером телефона уже существует");
                         return;
                     }
 
